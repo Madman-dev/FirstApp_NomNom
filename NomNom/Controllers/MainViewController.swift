@@ -118,10 +118,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func showTodoButton() {
         print("button Clicked")
-//        let controller = MessageViewController()
-//        let nav = UINavigationController(rootViewController: controller)
-//        nav.modalPresentationStyle = .fullScreen
-//        present(nav, animated: true)
+        let messageVC = storyboard?.instantiateViewController(withIdentifier: "messageVC") as! MessageViewController
+        present(messageVC, animated: true)
     }
     
     
