@@ -18,6 +18,8 @@
 		BD7077B029DEAF79000E3CC0 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7077AF29DEAF79000E3CC0 /* Dates.swift */; };
 		BD837B6A29DEBB0D002A8165 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD837B6929DEBB0D002A8165 /* MainViewController.swift */; };
 		BDC4EB6229E1229C0005A436 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC4EB6129E1229C0005A436 /* MessageViewController.swift */; };
+		BDCD695329E2638F001A0FC3 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCD695229E2638F001A0FC3 /* TodoTableViewCell.swift */; };
+		BDCD695529E29F3D001A0FC3 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCD695429E29F3D001A0FC3 /* CheckBox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		BD7077AF29DEAF79000E3CC0 /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 		BD837B6929DEBB0D002A8165 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BDC4EB6129E1229C0005A436 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		BDCD695229E2638F001A0FC3 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		BDCD695429E29F3D001A0FC3 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				BD7077A929DEABF8000E3CC0 /* Todos.swift */,
+				BDCD695229E2638F001A0FC3 /* TodoTableViewCell.swift */,
 				BD7077AF29DEAF79000E3CC0 /* Dates.swift */,
+				BDCD695429E29F3D001A0FC3 /* CheckBox.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,6 +202,8 @@
 				BD7077AC29DEAD78000E3CC0 /* GameViewController.swift in Sources */,
 				BD70779329DEA91B000E3CC0 /* AppDelegate.swift in Sources */,
 				BDC4EB6229E1229C0005A436 /* MessageViewController.swift in Sources */,
+				BDCD695329E2638F001A0FC3 /* TodoTableViewCell.swift in Sources */,
+				BDCD695529E29F3D001A0FC3 /* CheckBox.swift in Sources */,
 				BD32596F29E0109400BC7EBB /* Extension.swift in Sources */,
 				BD7077B029DEAF79000E3CC0 /* Dates.swift in Sources */,
 				BD70779529DEA91B000E3CC0 /* SceneDelegate.swift in Sources */,

@@ -37,32 +37,29 @@ class MessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
-        container.frame = UIScreen.main.bounds/// 여기에 바운드 효과를 넣는거다..?
+        view.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+//        container.frame = UIScreen.main.bounds/// 여기에 바운드 효과를 넣는거다..?
         configure()
+        
     }
     
     func configure() {
 //        view.addSubview(todoField)
 //        view.addSubview(registerButton)
         view.addSubview(container)
-        //        view.addSubview(messageChat)
-        //        messageChat.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        //        messageChat.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        //        messageChat.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-        //        messageChat.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7).isActive = true
         container.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         container.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         container.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
         container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50).isActive = true
         container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50).isActive = true
-        container.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateOut)))
+                
     }
     
-    @objc func animateOut() {
-        UIView.animate(withDuration: 0.3) {
-            self.container.transform = CGAffineTransform(translationX: 0, y: 0)
-        }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if touch?.view != self.container
+        { self.dismiss(animated: true)}
+        
     }
 }
 
