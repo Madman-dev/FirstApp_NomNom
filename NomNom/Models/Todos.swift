@@ -8,22 +8,18 @@
 import UIKit
 
 struct Todo {
-    var title: String?
-    var description: String?
-    var isCompleted: Bool?
+    let title: String
+    let isCompleted: Bool
     
-    init(title: String, description: String, isCompleted: Bool = false) {
+    init(title: String, isCompleted: Bool = false) {
         self.title = title
-        self.description = description
         self.isCompleted = isCompleted
     }
     
     func completeToggled() -> Todo {
-        return Todo(title: title!, description: description!, isCompleted: !isCompleted!)
+        return Todo(title: title, isCompleted: !isCompleted)
     }
 }
-
-
 
 //
 //class CheckBox: UIView {
