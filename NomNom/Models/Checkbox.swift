@@ -13,7 +13,8 @@ class Checkbox: UIControl {
     private weak var imageView: UIImageView!
     
     private var image: UIImage {
-        return checked ? UIImage(systemName: "checkmark.square.fill")! : UIImage(systemName: "square")!
+//        return checked ? UIImage(systemName: "checkmark.square.fill")! : UIImage(systemName: "square")!
+        return checked ? UIImage(systemName: "checkmark.circle.fill")! : UIImage(systemName: "circle")!
     }
     
     @IBInspectable
@@ -49,5 +50,14 @@ class Checkbox: UIControl {
         self.imageView = imageView
         
         backgroundColor = UIColor.clear
+        
+        addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
+    }
+    
+    @objc func touchUpInside() {    /// 🙋🏻‍♂️ 여기가 어떻게 작동하는지 확인 필요
+        print("clicked")
+        
+        checked = !checked
+        sendActions(for: .valueChanged)
     }
 }

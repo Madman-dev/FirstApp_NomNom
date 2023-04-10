@@ -8,7 +8,7 @@
 //import UIKit
 //
 //extension UIViewController {
-//    
+//
 //    func configureBackground() {
 //        let gradient = CAGradientLayer()    // 한번 더 보자~? >>> configureBackground는 이후에 출력되는 문제로 인해 SceneDelegate에 넣을 수 있는지 확인 필요⭐️
 //        gradient.frame = view.frame

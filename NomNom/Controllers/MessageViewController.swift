@@ -8,6 +8,7 @@
 import UIKit
 
 class MessageViewController: UIViewController {
+
     
     let container: UIView = {
         let view = UIView()
@@ -16,6 +17,7 @@ class MessageViewController: UIViewController {
         view.layer.cornerRadius = 10
         return view
     }()
+    
 //
 //    let todoField: UITextField = {
 //        let tf = UITextField()
@@ -37,7 +39,11 @@ class MessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+        view.backgroundColor = UIColor.black
+
+//        UIView.animate(withDuration: 5, animations: {
+//            self.view.backgroundColor = UIColor.clear
+//        })
 //        container.frame = UIScreen.main.bounds/// 여기에 바운드 효과를 넣는거다..?
         configure()
         
@@ -55,11 +61,12 @@ class MessageViewController: UIViewController {
                 
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { // dismiss everything outside this position
         let touch = touches.first
         if touch?.view != self.container
         { self.dismiss(animated: true)}
         
     }
+    
 }
 

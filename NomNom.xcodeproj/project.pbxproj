@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BD0A162429E30348008C9057 /* RetodoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A162329E30348008C9057 /* RetodoTableCell.swift */; };
+		BD0A162429E30348008C9057 /* RetodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A162329E30348008C9057 /* RetodoTableViewCell.swift */; };
 		BD32596F29E0109400BC7EBB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD32596E29E0109400BC7EBB /* Extension.swift */; };
 		BD70779329DEA91B000E3CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70779229DEA91B000E3CC0 /* AppDelegate.swift */; };
 		BD70779529DEA91B000E3CC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70779429DEA91B000E3CC0 /* SceneDelegate.swift */; };
@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BD0A162329E30348008C9057 /* RetodoTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetodoTableCell.swift; sourceTree = "<group>"; };
+		BD0A162329E30348008C9057 /* RetodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetodoTableViewCell.swift; sourceTree = "<group>"; };
 		BD32596E29E0109400BC7EBB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BD70778F29DEA91B000E3CC0 /* NomNom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NomNom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD70779229DEA91B000E3CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				BDCD695229E2638F001A0FC3 /* TodoTableViewCell.swift */,
-				BD0A162329E30348008C9057 /* RetodoTableCell.swift */,
+				BD0A162329E30348008C9057 /* RetodoTableViewCell.swift */,
 				BD7077A929DEABF8000E3CC0 /* Todos.swift */,
 				BDCD695429E29F3D001A0FC3 /* Checkbox.swift */,
 			);
@@ -204,7 +204,7 @@
 				BDC4EB6229E1229C0005A436 /* MessageViewController.swift in Sources */,
 				BDCD695329E2638F001A0FC3 /* TodoTableViewCell.swift in Sources */,
 				BDCD695529E29F3D001A0FC3 /* Checkbox.swift in Sources */,
-				BD0A162429E30348008C9057 /* RetodoTableCell.swift in Sources */,
+				BD0A162429E30348008C9057 /* RetodoTableViewCell.swift in Sources */,
 				BD32596F29E0109400BC7EBB /* Extension.swift in Sources */,
 				BD70779529DEA91B000E3CC0 /* SceneDelegate.swift in Sources */,
 				BD7077AA29DEABF8000E3CC0 /* Todos.swift in Sources */,
