@@ -13,15 +13,17 @@ import CoreData
 class MainViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-            
+        
+    
     let gradientLayer = CAGradientLayer()
-
+//    let messageVC = MessageViewController()
+    
     /// 🔥 텍스트가 이쁘게 나오지는 않네 - Font, 길이 제한 (몇 자 정도...), 테두리 한번 보자
     var todos = [
         Todo(title: "Testing cell"),
         Todo(title: "leaing out a point from behind?")
     ]
-     
+    
     private let todayLabel: UILabel = {
         let label = UILabel()
         label.text = "Today"
@@ -42,7 +44,7 @@ class MainViewController: UIViewController {
         let button = UIButton(type: .custom)
         button.setTitle("ListUp", for: .normal)
         button.backgroundColor = .black
-//        button.tintColor = .white
+        //        button.tintColor = .white
         button.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowRadius = 8
@@ -52,7 +54,8 @@ class MainViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 200).isActive = true
         button.widthAnchor.constraint(equalToConstant: 200).isActive = true
         
-        button.addTarget(self, action: #selector(showTodoButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showTodoButtonTapped), for: .touchUpInside)
+        //        button.addTarget(self, action: #selector(showTodoButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -66,21 +69,21 @@ class MainViewController: UIViewController {
         bt.layer.shadowColor = UIColor.black.cgColor
         bt.layer.shadowOpacity = 0.7
         
-        bt.addTarget(self, action: #selector(storageButtonTapped), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(showTodoButtonTapped), for: .touchUpInside)
         return bt
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = view.bounds
-//        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
-//                                UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
-//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-//        gradientLayer.shouldRasterize = true    // 🙋🏻‍♂️bitmap으로 변형해야하는 이유가 있는건가?
-//        view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
+        
+        //        let gradientLayer = CAGradientLayer()
+        //        gradientLayer.frame = view.bounds
+        //        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
+        //                                UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
+        //        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        //        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        //        gradientLayer.shouldRasterize = true    // 🙋🏻‍♂️bitmap으로 변형해야하는 이유가 있는건가?
+        //        view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
         
         configure()
         tableView.delegate = self
@@ -129,42 +132,57 @@ class MainViewController: UIViewController {
     
     
     /// 이것도 실패
-//    func setTableViewBackgroundColor(sender: UITableViewController, _ topColor: UIColor, _ bottomColor: UIColor) {
-//        let gradientBackgroundColors = [topColor.cgColor, bottomColor.cgColor]
-////        let gradientLocations = [0.0,1.0]
-//
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.colors = gradientBackgroundColors
-////        gradientLayer.locations = gradientLocations
-//
-//        gradientLayer.frame = sender.tableView.bounds
-//        let backgroundView = UIView(frame: sender.tableView.bounds)
-//        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
-//        sender.tableView.backgroundView = backgroundView
-//    }
-        
+    //    func setTableViewBackgroundColor(sender: UITableViewController, _ topColor: UIColor, _ bottomColor: UIColor) {
+    //        let gradientBackgroundColors = [topColor.cgColor, bottomColor.cgColor]
+    ////        let gradientLocations = [0.0,1.0]
+    //
+    //        let gradientLayer = CAGradientLayer()
+    //        gradientLayer.colors = gradientBackgroundColors
+    ////        gradientLayer.locations = gradientLocations
+    //
+    //        gradientLayer.frame = sender.tableView.bounds
+    //        let backgroundView = UIView(frame: sender.tableView.bounds)
+    //        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
+    //        sender.tableView.backgroundView = backgroundView
+    //    }
+    
+    // 🔥 이건 화면을 보여주는 거고...
     @objc func showTodoButton() {
         print("투두 버튼이 눌렸습니다.")
+        // 🔥 animation 효과 적용 시도
         let messageVC = storyboard?.instantiateViewController(withIdentifier: "messageVC") as! MessageViewController
         present(messageVC, animated: true)
     }
     
+    @IBAction func showTodoButtonTapped(_ sender: UIButton) {
+        showTodoButton()
+        print("연결됐나?")
+        
+        //        messageVC.animateCallback = {
+        //            UIView.animate(withDuration: 0.5, animations: {
+        //                self.messageVC.animatedView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        //    //            UIView(frame: CGRect(x: 50, y: 180, width: 300, height: 300))
+        //            })
+    }
+    
+    
     /// connecting 2nd VC - changed to present entire view
-//    @objc func addButtonTapped(_ sender: UIButton) {
-//        print("버튼이 눌렸습니다")
-//        let messageVC = storyboard?.instantiateViewController(withIdentifier: "messageVC") as! MessageViewController
-//        present(messageVC, animated: true)
-////        let controller = MessageViewController()
-////        controller.delegate = self
-////        let nav = UINavigationController(rootViewController: controller)
-////        nav.modalPresentationStyle = .fullScreen
-////        present(nav)
-//
-//    }
+    //    @objc func addButtonTapped(_ sender: UIButton) {
+    //        print("버튼이 눌렸습니다")
+    //        let messageVC = storyboard?.instantiateViewController(withIdentifier: "messageVC") as! MessageViewController
+    //        present(messageVC, animated: true)
+    ////        let controller = MessageViewController()
+    ////        controller.delegate = self
+    ////        let nav = UINavigationController(rootViewController: controller)
+    ////        nav.modalPresentationStyle = .fullScreen
+    ////        present(nav)
+    //
+    //    }
     
     @objc func storageButtonTapped() {
         print("저장 버튼이 눌렸습니다.")
     }
+    
     
 }
 
@@ -175,17 +193,17 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "checked cell", for: indexPath) as! RetodoTableViewCell    /// ⭐️ 여기서 중요한건 셀을 새롭게 만드는게 아니라 기존에 가지고 있던 셀을 "재활용"함으로써 효율성을 높이는데 차이가 존재한다. The app increases efficiency through recycling their memory and its views
-//        let cell = RetodoTableCell()
-//        cell.textLabel?.text = todos[indexPath.row].title
+        //        let cell = RetodoTableCell()
+        //        cell.textLabel?.text = todos[indexPath.row].title
         let todo = todos[indexPath.row]
         cell.set(title: todo.title, checked: todo.isCompleted)
         
         // adding gradient behind tableView >>> Cell에 컬러를 적용하는 코드였다.
-//        let layer = CAGradientLayer()
-//        layer.frame = cell.bounds.insetBy(dx: 4, dy: 4)
-//        layer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
-//                        UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
-//        cell.contentView.layer.insertSublayer(layer, at: 0) /// 이게 뭘하는 코드지?
+        //        let layer = CAGradientLayer()
+        //        layer.frame = cell.bounds.insetBy(dx: 4, dy: 4)
+        //        layer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
+        //                        UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
+        //        cell.contentView.layer.insertSublayer(layer, at: 0) /// 이게 뭘하는 코드지?
         
         return cell
     }
@@ -207,30 +225,30 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     /// ⭐️ 지우기 위해 사용한 코드라고 생각했는데 - 이건 아니였네
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let action = UIContextualAction(style: .destructive, title: "삭제") { action, view, complete in
-//            let todo = self.todos[indexPath.row].isCompleted
-//
-//            complete(true)
-//            print("삭제 되었습니다.")
-//        }
-//        return UISwipeActionsConfiguration(actions: [action])
-//    }
-  
+    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    //        let action = UIContextualAction(style: .destructive, title: "삭제") { action, view, complete in
+    //            let todo = self.todos[indexPath.row].isCompleted
+    //
+    //            complete(true)
+    //            print("삭제 되었습니다.")
+    //        }
+    //        return UISwipeActionsConfiguration(actions: [action])
+    //    }
+    
     /// tableView에 추가 행동을 적용하려고 했는데 - 이럴 경우 대부분 canEdit, editingStyle 등으로 많이 소개를 하고 있었다 - 하지만 더 쉬운 방법이 있는 듯하다! (지금 내 상황에 딱 맞는?)
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if editingStyle == .delete {
-//            self.tableView.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        } else if editingStyle == .insert {
-//
-//        }
-//    }
+    //    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    //        return true
+    //    }
+    //
+    //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //
+    //        if editingStyle == .delete {
+    //            self.tableView.remove(at: indexPath.row)
+    //            tableView.deleteRows(at: [indexPath], with: .fade)
+    //        } else if editingStyle == .insert {
+    //
+    //        }
+    //    }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete  /// 이 메서드에서 리턴하는 수는 하나의 셀에 적용할 수 있는 변경점들이다.

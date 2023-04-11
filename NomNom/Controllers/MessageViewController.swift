@@ -8,8 +8,10 @@
 import UIKit
 
 class MessageViewController: UIViewController {
-
     
+//    var animatedView: UIView!
+//    var animateCallback: (() -> Void)?
+
     let container: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -40,6 +42,13 @@ class MessageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black
+        
+        // 🔥 animation 효과 적용 시도
+//        animatedView = UIView(frame: CGRect(x: 50, y: 180, width: 300, height: 300))
+//        animatedView.backgroundColor = UIColor.red
+//        view.addSubview(animatedView)
+        
+//        triggerAnimateCallback()
 
 //        UIView.animate(withDuration: 5, animations: {
 //            self.view.backgroundColor = UIColor.clear
@@ -58,14 +67,19 @@ class MessageViewController: UIViewController {
         container.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
         container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50).isActive = true
         container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50).isActive = true
-                
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { // dismiss everything outside this position
+    /// 🔥 failed impletmenting a transition of UIView
+//    func triggerAnimateCallback() {
+//        animateCallback?()
+//    }
+
+    
+    /// dismiss everything outside this position
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        if touch?.view != self.container
+        if touch?.view != self.container //container >> 원래
         { self.dismiss(animated: true)}
-        
     }
     
 }
