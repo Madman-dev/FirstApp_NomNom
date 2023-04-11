@@ -14,3 +14,12 @@
 to work like a ToDo app - I have failed to make the functions work.
 Code to connecting the targets have gone difficult to straighten out.
 Created UITableView anew through storyboard.
+
+### 4/10
+- unable to fix previous issue with UITableView
+- made adjustments to plan && app UX/UI
+
+### 4/11
+- added 'complete', 'delete' features within todo list
+- added new button to check previous written/ daily finished tasks - plan to change plans to this feature as I have a specific plan for the app
+- fixed issue with having gradientLayer being projected over the todo list as well as the button - considering time frame of the app's launch was VERY important
