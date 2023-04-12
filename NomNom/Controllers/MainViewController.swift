@@ -43,7 +43,7 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    private let addButton: UIButton = {
+    public var addButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle("ListUp", for: .normal)
         button.backgroundColor = .black
