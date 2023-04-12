@@ -13,10 +13,13 @@ import CoreData
 class MainViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-        
     
     let gradientLayer = CAGradientLayer()
-//    let messageVC = MessageViewController()
+    //    let messageVC = MessageViewController()
+    
+    //    /// 🔥 아래는 animation 효과를 위해 만든 property들
+    //    let transition = PopAnimator()
+    //    var selectedButton: UIButton!
     
     /// 🔥 텍스트가 이쁘게 나오지는 않네 - Font, 길이 제한 (몇 자 정도...), 테두리 한번 보자
     var todos = [
@@ -69,9 +72,23 @@ class MainViewController: UIViewController {
         bt.layer.shadowColor = UIColor.black.cgColor
         bt.layer.shadowOpacity = 0.7
         
-        bt.addTarget(self, action: #selector(showTodoButtonTapped), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(storageButtonTapped), for: .touchUpInside)
         return bt
     }()
+    
+
+    // 👀 message >> 이건 어떤 코드? >> connecting the tableViewCell to the messageField ⭐️⭐️⭐️⭐️
+    @IBSegueAction func todoViewController(_ coder: NSCoder) -> MessageViewController? {
+        let vc = MessageViewController(coder: coder)
+
+        if let indexPath = tableView.indexPathForSelectedRow {
+            let todo = todos[indexPath.row]
+            vc?.todo = todo
+            vc?.presentationController?.delegate = self  // to make selected row not be noticed as to modify >> ...?? if canceled
+        }
+        vc?.delegate = self
+        return vc
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,22 +164,36 @@ class MainViewController: UIViewController {
     //    }
     
     // 🔥 이건 화면을 보여주는 거고...
-    @objc func showTodoButton() {
-        print("투두 버튼이 눌렸습니다.")
-        // 🔥 animation 효과 적용 시도
-        let messageVC = storyboard?.instantiateViewController(withIdentifier: "messageVC") as! MessageViewController
-        present(messageVC, animated: true)
-    }
+    //    @objc func showTodoButton() {
+    //        print("투두 버튼이 눌렸습니다.")
+    //        // 🔥 animation 효과 적용 시도
+    //        let messageVC = storyboard?.instantiateViewController(withIdentifier: "messageVC") as! MessageViewController
+    ////            messageVC.transitioningDelegate = self
+    ////            messageVC.modalPresentationStyle = .custom
+    //        present(messageVC, animated: true)
+    //    }
     
     @IBAction func showTodoButtonTapped(_ sender: UIButton) {
-        showTodoButton()
-        print("연결됐나?")
+        //        showTodoButton()
+        print("투두 버튼이 눌렸습니다.")
         
-        //        messageVC.animateCallback = {
-        //            UIView.animate(withDuration: 0.5, animations: {
-        //                self.messageVC.animatedView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        //    //            UIView(frame: CGRect(x: 50, y: 180, width: 300, height: 300))
-        //            })
+        /// ⏲️ 버튼은 이미 programmatically 만든 상태인데, 이걸 perform segue로 연결해두어야 하는 것 >> 여기서 mainView에서 다음 화면으로 연결을 하고 있다!!
+        /// Q. performSegue와 instantiateViewController랑 어떤 차이가 있는걸까?
+
+        //        let messageVC = storyboard?.instantiateViewController(withIdentifier: "messageVC") as! MessageViewController
+        //        present(messageVC, animated: true)
+        performSegue(withIdentifier: "messageSegue", sender: self)
+        /// DO I HAVE TO CONNECT USING SEGUE?
+        
+
+        /// 🔥 animation 효과 적용 시도
+//            messageVC.transitioningDelegate = self
+//            messageVC.modalPresentationStyle = .custom
+//        messageVC.animateCallback = {
+//            UIView.animate(withDuration: 0.5, animations: {
+//                self.messageVC.animatedView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+//                UIView(frame: CGRect(x: 50, y: 180, width: 300, height: 300))
+//            })
     }
     
     
@@ -182,11 +213,24 @@ class MainViewController: UIViewController {
     @objc func storageButtonTapped() {
         print("저장 버튼이 눌렸습니다.")
     }
-    
-    
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    /// 🔥 trying to connect TableViewCell to messageVC - without using Segue
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let vc = MessageViewController()
+//        if let indexPath = tableView.indexPathForSelectedRow {
+//            let todo = todos[indexPath.row]
+//            vc.todo = todo
+//        }
+//
+//        let messageViewController = storyboard?.instantiateViewController(withIdentifier: "messageVC") as? MessageViewController
+//        if let messageViewController = messageViewController {
+//            present(messageViewController, animated: true)
+//        }
+//    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
     }
@@ -204,7 +248,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         //        layer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
         //                        UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
         //        cell.contentView.layer.insertSublayer(layer, at: 0) /// 이게 뭘하는 코드지?
-        
         return cell
     }
     
@@ -252,7 +295,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete  /// 이 메서드에서 리턴하는 수는 하나의 셀에 적용할 수 있는 변경점들이다.
-        ///
     }
     
     /// ⭐️ delegate과 datasource 관련해서 사용하는 코드가 다르다. 무엇을 하느냐에 따라 다르게 활용할 것
@@ -267,5 +309,35 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let todo = todos.remove(at: sourceIndexPath.row)    // 기존에 있던 위치에서 ⭐️🙋🏻‍♂️
         todos.insert(todo, at: destinationIndexPath.row)    // 변경되는 위치로 이동을 시키는 것
+    }
+}
+
+/// ⭐️ 여기서 데이터 업데이트를 다루고 있다!! ⭐️
+extension MainViewController: MessageViewControllerDelegate {
+    func messageViewController(_ vc: MessageViewController, didSaveTodo todo: Todo) {
+        
+        /// having dismiss(animated: true) at the bottom of the code places the new todo before the animation starts. Thus just adds it before anyone can see it
+        
+        dismiss(animated: true) {    // Not dismissed automatically - thus need to do manually
+            // 🔥 to update the data onto the TableVIew
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                // update!! 🔥
+                self.todos[indexPath.row] = todo // 여기에서 todo를 스코프 내에 찾지 못하는 문제가 있었는데 - parameter을 제대로 확인하지 않아서 발생한 문제
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+            } else {
+                // create new!!
+                self.todos.append(todo)
+                self.tableView.insertRows(at: [IndexPath(row: self.todos.count-1, section: 0)], with: .automatic)
+            }
+        }
+     }
+}
+
+extension MainViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }

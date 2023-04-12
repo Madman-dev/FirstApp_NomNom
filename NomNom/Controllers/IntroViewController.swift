@@ -20,18 +20,17 @@ class IntroViewController: UIViewController {
         view.backgroundColor = .black
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageView)
         imageView.center = view.center
-        imageView.frame = view.bounds
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { /// ⭐️ 이부분은 우리에게 보이고 나서 실행되는 부분을 뜻하는구나
-            self.animate()
+        // imageView.frame = view.bounds >> 이 코드로 인해 X,Y 값이 반전 되었다.
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) { /// ⭐️ 이부분은 우리에게 보이고 나서 실행되는 부분을 뜻하는구나
+            self.animation()
         }
     }
     
-    private func animate() {
+    private func animation() {
         UIView.animate(withDuration: 1, animations: {
             
             let size = self.view.frame.size.width

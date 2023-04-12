@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD0A162429E30348008C9057 /* RetodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A162329E30348008C9057 /* RetodoTableViewCell.swift */; };
 		BD32596F29E0109400BC7EBB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD32596E29E0109400BC7EBB /* Extension.swift */; };
+		BD69178429E58E4700FFB73D /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD69178329E58E4700FFB73D /* PopAnimator.swift */; };
 		BD70779329DEA91B000E3CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70779229DEA91B000E3CC0 /* AppDelegate.swift */; };
 		BD70779529DEA91B000E3CC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70779429DEA91B000E3CC0 /* SceneDelegate.swift */; };
 		BD70779A29DEA91B000E3CC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD70779829DEA91B000E3CC0 /* Main.storyboard */; };
@@ -20,11 +21,13 @@
 		BDCD695329E2638F001A0FC3 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCD695229E2638F001A0FC3 /* TodoTableViewCell.swift */; };
 		BDCD695529E29F3D001A0FC3 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCD695429E29F3D001A0FC3 /* Checkbox.swift */; };
 		BDD6931629E54F35002416DE /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD6931529E54F35002416DE /* IntroViewController.swift */; };
+		BDE8820C29E6298800F28F06 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8820B29E6298800F28F06 /* TransitionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BD0A162329E30348008C9057 /* RetodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetodoTableViewCell.swift; sourceTree = "<group>"; };
 		BD32596E29E0109400BC7EBB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		BD69178329E58E4700FFB73D /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		BD70778F29DEA91B000E3CC0 /* NomNom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NomNom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD70779229DEA91B000E3CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD70779429DEA91B000E3CC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		BDCD695229E2638F001A0FC3 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		BDCD695429E29F3D001A0FC3 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		BDD6931529E54F35002416DE /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		BDE8820B29E6298800F28F06 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				BD32596E29E0109400BC7EBB /* Extension.swift */,
+				BDE8820B29E6298800F28F06 /* TransitionManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 		BD7077AE29DEADE2000E3CC0 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BD69178329E58E4700FFB73D /* PopAnimator.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 				BD7077AC29DEAD78000E3CC0 /* GameViewController.swift in Sources */,
 				BD70779329DEA91B000E3CC0 /* AppDelegate.swift in Sources */,
 				BDC4EB6229E1229C0005A436 /* MessageViewController.swift in Sources */,
+				BDE8820C29E6298800F28F06 /* TransitionManager.swift in Sources */,
 				BDCD695329E2638F001A0FC3 /* TodoTableViewCell.swift in Sources */,
 				BDCD695529E29F3D001A0FC3 /* Checkbox.swift in Sources */,
 				BDD6931629E54F35002416DE /* IntroViewController.swift in Sources */,
@@ -208,6 +215,7 @@
 				BD32596F29E0109400BC7EBB /* Extension.swift in Sources */,
 				BD70779529DEA91B000E3CC0 /* SceneDelegate.swift in Sources */,
 				BD7077AA29DEABF8000E3CC0 /* Todos.swift in Sources */,
+				BD69178429E58E4700FFB73D /* PopAnimator.swift in Sources */,
 				BD837B6A29DEBB0D002A8165 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
