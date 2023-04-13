@@ -13,95 +13,56 @@ protocol MessageViewControllerDelegate: AnyObject {
 
 class MessageViewController: UIViewController {
     
-    @IBOutlet weak var messageField: UITextField!
-    @IBOutlet weak var stackVIew: UIStackView!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var viewHolder: UIView!
-    
-    var todo: Todo?
-    
     weak var delegate: MessageViewControllerDelegate?
-    
-    //    var animatedView: UIView!
-    //    var animateCallback: (() -> Void)?
-    
-//    let viewHolder: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = .white
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.layer.cornerRadius = 10
-//        return view
-//    }()
-    
-    
-    //
-    //    let todoField: UITextField = {
-    //        let tf = UITextField()
-    //        tf.translatesAutoresizingMaskIntoConstraints = false
-    //        //        tf.backgroundColor = UIColor.blue
-    //        tf.placeholder = "Placeholder"
-    //        tf.text = "시험"
-    //        tf.font = UIFont.systemFont(ofSize: 12, weight: .medium)
-    //        ///        tf.topAnchor.constraint(equalTo: view., constant: 10)
-    //        //        tf.backgroundColor = .blue
-    //        return tf
-    //    }()
-    //
-    //    let registerButton: UIButton = {
-    //        let button = UIButton()
-    //        button.backgroundColor = UIColor.red
-    //        return button
-    //    }()
-    
+    var todo: Todo?
+
+    let messageView = UIView()
+    let sendButton = UIButton()
+//    let messageField = UITextField()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black
-        messageField.text = todo?.title
-
+        view.backgroundColor = .black
         
-        // 🔥 animation 효과 적용 시도
-        //        animatedView = UIView(frame: CGRect(x: 50, y: 180, width: 300, height: 300))
-        //        animatedView.backgroundColor = UIColor.red
-        //        view.addSubview(animatedView)
+        view.addSubview(messageView)
+        view.addSubview(sendButton)
+        //        view.addSubview(messageField)
         
-        //        triggerAnimateCallback()
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        sendButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50).isActive = true
+        sendButton.backgroundColor = .blue
+        sendButton.addTarget(self, action: #selector(save), for: .touchUpInside)
         
-        //        UIView.animate(withDuration: 5, animations: {
-        //            self.view.backgroundColor = UIColor.clear
-        //        })
-        //        container.frame = UIScreen.main.bounds/// 여기에 바운드 효과를 넣는거다..?
-//        configure()
-        
+//        messageField.translatesAutoresizingMaskIntoConstraints = false
+//        messageField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        messageField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
+//        messageField.backgroundColor = .green
     }
     
-//    func configure() {
-        //        view.addSubview(todoField)
-        //        view.addSubview(registerButton)
-//        view.addSubview(viewHolder)
-//        viewHolder.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-//        viewHolder.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
-//        viewHolder.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
-//        viewHolder.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50).isActive = true
-//        viewHolder.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50).isActive = true
-    
-    /// 🔥 failed impletmenting a transition of UIView
-    //    func triggerAnimateCallback() {
-    //        animateCallback?()
-    //    }
-    
+    override func viewDidLayoutSubviews() {
+        messageView.backgroundColor = .yellow
+        messageView.layer.cornerRadius = 180/2
+        messageView.clipsToBounds = true
+        messageView.translatesAutoresizingMaskIntoConstraints = false
+        messageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        messageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        messageView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
     
     /// dismiss everything outside this position
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        if touch?.view != self.viewHolder //container >> 원래
-        { self.dismiss(animated: true)}
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let touch = touches.first
+//        if touch?.view != self.sendButton //container >> 원래
+//        { self.dismiss(animated: true)}
+//    }
+
+    @objc func save(_ sender: UIButton) {
+        print("되돌아가기 버튼이 눌렸습니다.")
+//        let todo = Todo(title: messageField.text!)
+//        delegate?.messageViewController(self, didSaveTodo: todo)
+        dismiss(animated: true)
     }
-    
-    // every time the button is clicked, it creates new todo and send back to the delegate && with this data I can use this to update the cell, create new one or anything else with it >> 버튼을 누르면 사라지기는 하지만 데이터는 업데이트가 되고 있지 않다 >> THIS HAS TO BE DONE ON TABLEVIEW
-    @IBAction func save(_ sender: UIButton) {
-        let todo = Todo(title: messageField.text!)
-        delegate?.messageViewController(self, didSaveTodo: todo)
-    }
-    
 }
 

@@ -105,66 +105,11 @@
                     <view key="view" contentMode="scaleToFill" id="b7n-tz-C8o">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dCg-WL-9le">
-                                <rect key="frame" x="10" y="331" width="373" height="190"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Mo-kx-apc">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="190"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="px0-hQ-ACI">
-                                                <rect key="frame" x="10" y="2" width="186" height="186"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="px0-hQ-ACI" secondAttribute="height" multiplier="1:1" id="Jrt-TK-dKm"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzU-0v-xmJ">
-                                                <rect key="frame" x="206" y="40" width="157" height="110"/>
-                                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="XzU-0v-xmJ" secondAttribute="height" multiplier="10:7" id="DtM-1B-wtw"/>
-                                                </constraints>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="버튼"/>
-                                                <connections>
-                                                    <action selector="save:" destination="GcV-5t-qcw" eventType="touchUpInside" id="Dnt-gr-JpM"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBrownColor"/>
-                                        <constraints>
-                                            <constraint firstItem="px0-hQ-ACI" firstAttribute="leading" secondItem="5Mo-kx-apc" secondAttribute="leading" constant="10" id="2qc-hW-9oj"/>
-                                            <constraint firstItem="XzU-0v-xmJ" firstAttribute="leading" secondItem="px0-hQ-ACI" secondAttribute="trailing" constant="10" id="JIM-u9-lpe"/>
-                                            <constraint firstItem="XzU-0v-xmJ" firstAttribute="top" secondItem="5Mo-kx-apc" secondAttribute="top" constant="40" id="O6Z-Xn-omM"/>
-                                            <constraint firstAttribute="bottom" secondItem="XzU-0v-xmJ" secondAttribute="bottom" constant="40" id="aoe-25-hHm"/>
-                                            <constraint firstAttribute="bottom" secondItem="px0-hQ-ACI" secondAttribute="bottom" constant="2" id="h7p-Fi-v50"/>
-                                            <constraint firstAttribute="trailing" secondItem="XzU-0v-xmJ" secondAttribute="trailing" constant="10" id="rar-EN-7sv"/>
-                                            <constraint firstItem="px0-hQ-ACI" firstAttribute="top" secondItem="5Mo-kx-apc" secondAttribute="top" constant="2" id="vhm-o0-QaT"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="169-lV-tbf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="dCg-WL-9le" firstAttribute="centerY" secondItem="b7n-tz-C8o" secondAttribute="centerY" id="AbM-yN-ihs"/>
-                            <constraint firstItem="169-lV-tbf" firstAttribute="trailing" secondItem="dCg-WL-9le" secondAttribute="trailing" constant="10" id="lrY-3C-aRU"/>
-                            <constraint firstItem="dCg-WL-9le" firstAttribute="centerX" secondItem="b7n-tz-C8o" secondAttribute="centerX" id="osn-Sf-kk3"/>
-                            <constraint firstItem="dCg-WL-9le" firstAttribute="leading" secondItem="169-lV-tbf" secondAttribute="leading" constant="10" id="qur-hD-AzV"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XSM-mm-S11"/>
                     <value key="contentSizeForViewInPopover" type="size" width="393" height="852"/>
-                    <connections>
-                        <outlet property="messageField" destination="px0-hQ-ACI" id="z8e-wR-HNz"/>
-                        <outlet property="sendButton" destination="XzU-0v-xmJ" id="8s6-8G-HNQ"/>
-                        <outlet property="stackVIew" destination="dCg-WL-9le" id="nXe-hd-keE"/>
-                        <outlet property="viewHolder" destination="5Mo-kx-apc" id="g5k-Zy-pXf"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UE2-P0-91k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -174,12 +119,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

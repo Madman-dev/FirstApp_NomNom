@@ -59,6 +59,8 @@ class IntroViewController: UIViewController {
     }
 }
 
+
+/// Animation 도전 실패
 //    private func animation() {
 //        UIView.animate(withDuration: 1) {   /// 이 부분이 애니메이션을 실행하는 속도
 //            let size = self.view.frame.size.width * 2.5
