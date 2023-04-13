@@ -32,3 +32,5 @@ Created UITableView anew through storyboard.
 - lots of trials and errors regarding using custom transition inside the app.
 ** managed to place a transition in, but apparently a view transition is not what's needed for my use
 - to place in a button within the transitioning image, I'll have to look into collectionViewCell transition - will have to post online && ask for help
+![ezgif com-resize](https://user-images.githubusercontent.com/119504454/231800035-48072093-2804-4fd0-9fc3-3b3d3a13cbae.gif)
+
