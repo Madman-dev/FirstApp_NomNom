@@ -23,3 +23,14 @@ Created UITableView anew through storyboard.
 - added 'complete', 'delete' features within todo list
 - added new button to check previous written/ daily finished tasks - plan to change plans to this feature as I have a specific plan for the app
 - fixed issue with having gradientLayer being projected over the todo list as well as the button - considering time frame of the app's launch was VERY important
+
+### 4/12
+- spent most of the time searching to learn about custom Transition
+* difficult to learn, still don't understand much of it but found lot of resources in creating one
+
+### 4/13
+- lots of trials and errors regarding using custom transition inside the app.
+** managed to place a transition in, but apparently a view transition is not what's needed for my use
+- to place in a button within the transitioning image, I'll have to look into collectionViewCell transition - will have to post online && ask for help
+![ezgif com-resize](https://user-images.githubusercontent.com/119504454/231800035-48072093-2804-4fd0-9fc3-3b3d3a13cbae.gif)
+
