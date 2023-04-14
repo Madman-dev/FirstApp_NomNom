@@ -50,8 +50,14 @@ class MainViewController: UIViewController {
         return bt
     }()
     
+    private let coverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.5)
+        view.fadeIn(duration: 1)
+        return view
+    }()
+
     let presenter = Presenter()
-    
 
     // 👀 message >> 이건 어떤 코드? >> connecting the tableViewCell to the messageField ⭐️⭐️⭐️⭐️
     @IBSegueAction func todoViewController(_ coder: NSCoder) -> MessageViewController? {
@@ -84,7 +90,8 @@ class MainViewController: UIViewController {
         view.addSubview(stack)
         view.addSubview(addButton)
         view.addSubview(storageButton)
-        view.backgroundColor = .black
+
+//        view.backgroundColor = .black
         
         addButton.backgroundColor = .white
         addButton.setTitleColor(.black, for: .normal)
@@ -104,22 +111,51 @@ class MainViewController: UIViewController {
         
         stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         stack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        
+
     }
+    
+    func createOverlay () {
+        view.addSubview(coverView)
+        
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        coverView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        coverView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        coverView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        coverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    func dimissOverlay() {
+//        UIView.animate(
+//            withDuration: 0.3,
+//            delay: 0,
+//            options: .curveEaseInOut,
+//            animations: { self.view.layoutIfNeeded() },
+//            completion: { _ in completion() }
+//        )
+        
+        coverView.fadeOut(duration: 0.5)
+    }
+
     
     override func viewWillLayoutSubviews() {  /// 🙋🏻‍♂️still covers the app - why? > called too late?
         super.viewWillLayoutSubviews()
         
-//        gradientLayer.frame = view.bounds
-//        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
-//                                UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
-//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-//        view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
+                                UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
     }
     
     @objc func TodoButtonTapped(_ sender: UIButton) {
         print("투두 버튼이 눌렸습니다.")
         presenter.present(MessageViewController(), from: self)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.createOverlay()
+         }
     }
     
     @objc func storageButtonTapped() {
@@ -193,3 +229,21 @@ extension MainViewController: UIAdaptivePresentationControllerDelegate {
         }
     }
 }
+
+//public extension UIView {
+//    func fadeIn(duration: TimeInterval = 1.0) {
+//        UIView.animate(withDuration: duration, animations: {
+//            self.alpha = 1.0
+//        })
+//    }
+//
+//    func fadeOut(duration: TimeInterval = 1.0) {
+//        UIView.animate(withDuration: duration, animations: {
+//            self.alpha = 0
+//        })
+//    }
+//}
+
+/// 방식을 바꿔야겠다
+/// 위로 올려보내는 느낌 + 테이블 뷰 느낌 변경
+///

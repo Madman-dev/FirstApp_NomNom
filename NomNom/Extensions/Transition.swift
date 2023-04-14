@@ -88,8 +88,8 @@ class Transition: NSObject, UIViewControllerAnimatedTransitioning {
         dismissedConstraints = [
             presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor, constant: 80),
             presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor, constant: -80),
-            presentedView.topAnchor.constraint(equalTo: context.containerView.topAnchor, constant: 400),
-            presentedView.bottomAnchor.constraint(equalTo: context.containerView.bottomAnchor, constant: -30)
+            presentedView.topAnchor.constraint(equalTo: context.containerView.centerYAnchor, constant: -400),
+            presentedView.bottomAnchor.constraint(equalTo: context.containerView.bottomAnchor, constant: 400)
         ]
 
         NSLayoutConstraint.activate(dismissedConstraints)

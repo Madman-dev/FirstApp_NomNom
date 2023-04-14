@@ -11,6 +11,8 @@ protocol MessageViewControllerDelegate: AnyObject {
     func messageViewController(_ vc: MessageViewController, didSaveTodo: Todo)
 }
 
+let mainController = MainViewController()
+
 class MessageViewController: UIViewController {
     
     weak var delegate: MessageViewControllerDelegate?
@@ -22,7 +24,7 @@ class MessageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = .clear
         
         view.addSubview(messageView)
         view.addSubview(sendButton)
@@ -62,6 +64,10 @@ class MessageViewController: UIViewController {
         print("되돌아가기 버튼이 눌렸습니다.")
 //        let todo = Todo(title: messageField.text!)
 //        delegate?.messageViewController(self, didSaveTodo: todo)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            mainController.dimissOverlay()
+         }
         dismiss(animated: true)
     }
 }
