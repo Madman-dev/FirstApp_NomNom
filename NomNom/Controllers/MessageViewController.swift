@@ -25,7 +25,6 @@ class MessageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-        
         view.addSubview(messageView)
         view.addSubview(sendButton)
         //        view.addSubview(messageField)
@@ -50,7 +49,7 @@ class MessageViewController: UIViewController {
         messageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         messageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         messageView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -22).isActive = true
     }
     
     /// dismiss everything outside this position
@@ -65,9 +64,9 @@ class MessageViewController: UIViewController {
 //        let todo = Todo(title: messageField.text!)
 //        delegate?.messageViewController(self, didSaveTodo: todo)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            mainController.dimissOverlay()
-         }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//            mainController.dimissOverlay()
+//         }
         dismiss(animated: true)
     }
 }

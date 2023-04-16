@@ -12,7 +12,6 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let addButton = UIButton()
     let gradientLayer = CAGradientLayer()
     
     var todos = [
@@ -37,6 +36,21 @@ class MainViewController: UIViewController {
     }()
     
     
+    private let todoButton: UIButton = {
+        let bt = UIButton()
+        bt.backgroundColor = .red
+        bt.setTitle("Press Here", for: .normal)
+        bt.frame.size = CGSize(width: 300, height: 300)
+        bt.layer.cornerRadius = 200/2
+        bt.clipsToBounds = true
+//        bt.layer.shadowColor = UIColor.black.cgColor
+//        bt.layer.shadowRadius = 8
+//        bt.layer.shadowOffset = CGSize(width: 0, height: 0)
+        bt.addTarget(self, action: #selector(TodoButtonTapped), for: .touchUpInside)
+        return bt
+    }()
+    
+    
     private let storageButton: UIButton = {
         let bt = UIButton(type: .custom)
         bt.setImage(UIImage(systemName: "tray"), for: .normal)
@@ -53,7 +67,7 @@ class MainViewController: UIViewController {
     private let coverView: UIView = {
         let view = UIView()
         view.backgroundColor = .black.withAlphaComponent(0.5)
-        view.fadeIn(duration: 1)
+//        view.fadeIn(duration: 1)
         return view
     }()
 
@@ -88,55 +102,26 @@ class MainViewController: UIViewController {
         stack.axis = .horizontal
         
         view.addSubview(stack)
-        view.addSubview(addButton)
         view.addSubview(storageButton)
-
-//        view.backgroundColor = .black
-        
-        addButton.backgroundColor = .white
-        addButton.setTitleColor(.black, for: .normal)
-        addButton.setTitle("Press here", for: .normal)
-        addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        addButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50).isActive = true
-        addButton.addTarget(self, action: #selector(TodoButtonTapped), for: .touchUpInside)
+        view.addSubview(todoButton)
         
         stack.translatesAutoresizingMaskIntoConstraints = false
-        addButton.translatesAutoresizingMaskIntoConstraints = false
+        todoButton.translatesAutoresizingMaskIntoConstraints = false
         storageButton.translatesAutoresizingMaskIntoConstraints = false
-                
-        storageButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 5).isActive = true
-        storageButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        storageButton.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: 0).isActive = true
-        storageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
-        
+
         stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         stack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        
 
+        todoButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 15).isActive = true
+        todoButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 80).isActive = true
+        todoButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
+        todoButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -80).isActive = true
+                
+        storageButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 5).isActive = true
+        storageButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        storageButton.rightAnchor.constraint(equalTo: todoButton.leftAnchor, constant: 0).isActive = true
+        storageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
     }
-    
-    func createOverlay () {
-        view.addSubview(coverView)
-        
-        coverView.translatesAutoresizingMaskIntoConstraints = false
-        coverView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        coverView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        coverView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        coverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
-    func dimissOverlay() {
-//        UIView.animate(
-//            withDuration: 0.3,
-//            delay: 0,
-//            options: .curveEaseInOut,
-//            animations: { self.view.layoutIfNeeded() },
-//            completion: { _ in completion() }
-//        )
-        
-        coverView.fadeOut(duration: 0.5)
-    }
-
     
     override func viewWillLayoutSubviews() {  /// 🙋🏻‍♂️still covers the app - why? > called too late?
         super.viewWillLayoutSubviews()
@@ -152,10 +137,9 @@ class MainViewController: UIViewController {
     @objc func TodoButtonTapped(_ sender: UIButton) {
         print("투두 버튼이 눌렸습니다.")
         presenter.present(MessageViewController(), from: self)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.createOverlay()
-         }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//            self.createOverlay()
+//         }
     }
     
     @objc func storageButtonTapped() {
