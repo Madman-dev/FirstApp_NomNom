@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BD0A162429E30348008C9057 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A162329E30348008C9057 /* TodoTableViewCell.swift */; };
 		BD32596F29E0109400BC7EBB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD32596E29E0109400BC7EBB /* Extension.swift */; };
-		BD69178429E58E4700FFB73D /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD69178329E58E4700FFB73D /* PopAnimator.swift */; };
 		BD70779329DEA91B000E3CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70779229DEA91B000E3CC0 /* AppDelegate.swift */; };
 		BD70779529DEA91B000E3CC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70779429DEA91B000E3CC0 /* SceneDelegate.swift */; };
 		BD70779A29DEA91B000E3CC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD70779829DEA91B000E3CC0 /* Main.storyboard */; };
@@ -22,14 +21,13 @@
 		BDD6931629E54F35002416DE /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD6931529E54F35002416DE /* IntroViewController.swift */; };
 		BDD8F23429E7A933009443D5 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD8F23329E7A933009443D5 /* Transition.swift */; };
 		BDD8F23A29E8344A009443D5 /* MainViewCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD8F23929E8344A009443D5 /* MainViewCopy.swift */; };
-		BDD8F23C29E8364C009443D5 /* MessageView Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD8F23B29E8364C009443D5 /* MessageView Copy.swift */; };
+		BDD8F23C29E8364C009443D5 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD8F23B29E8364C009443D5 /* MessageViewController.swift */; };
 		BDE8820C29E6298800F28F06 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8820B29E6298800F28F06 /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BD0A162329E30348008C9057 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		BD32596E29E0109400BC7EBB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		BD69178329E58E4700FFB73D /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		BD70778F29DEA91B000E3CC0 /* NomNom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NomNom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD70779229DEA91B000E3CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD70779429DEA91B000E3CC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +42,7 @@
 		BDD6931529E54F35002416DE /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		BDD8F23329E7A933009443D5 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		BDD8F23929E8344A009443D5 /* MainViewCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCopy.swift; sourceTree = "<group>"; };
-		BDD8F23B29E8364C009443D5 /* MessageView Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageView Copy.swift"; sourceTree = "<group>"; };
+		BDD8F23B29E8364C009443D5 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		BDE8820B29E6298800F28F06 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,7 +116,7 @@
 				BDD8F23D29E83752009443D5 /* previous copies */,
 				BDD6931529E54F35002416DE /* IntroViewController.swift */,
 				BD837B6929DEBB0D002A8165 /* MainViewController.swift */,
-				BDC4EB6129E1229C0005A436 /* MessageViewController.swift */,
+				BDD8F23B29E8364C009443D5 /* MessageViewController.swift */,
 				BD7077AB29DEAD78000E3CC0 /* GameViewController.swift */,
 			);
 			path = Controllers;
@@ -127,7 +125,6 @@
 		BD7077AE29DEADE2000E3CC0 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				BD69178329E58E4700FFB73D /* PopAnimator.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -142,8 +139,8 @@
 		BDD8F23D29E83752009443D5 /* previous copies */ = {
 			isa = PBXGroup;
 			children = (
+				BDC4EB6129E1229C0005A436 /* MessageViewController.swift */,
 				BDD8F23929E8344A009443D5 /* MainViewCopy.swift */,
-				BDD8F23B29E8364C009443D5 /* MessageView Copy.swift */,
 			);
 			path = "previous copies";
 			sourceTree = "<group>";
@@ -227,11 +224,10 @@
 				BDD6931629E54F35002416DE /* IntroViewController.swift in Sources */,
 				BD0A162429E30348008C9057 /* TodoTableViewCell.swift in Sources */,
 				BD32596F29E0109400BC7EBB /* Extension.swift in Sources */,
-				BDD8F23C29E8364C009443D5 /* MessageView Copy.swift in Sources */,
+				BDD8F23C29E8364C009443D5 /* MessageViewController.swift in Sources */,
 				BD70779529DEA91B000E3CC0 /* SceneDelegate.swift in Sources */,
 				BDD8F23A29E8344A009443D5 /* MainViewCopy.swift in Sources */,
 				BD7077AA29DEABF8000E3CC0 /* Todos.swift in Sources */,
-				BD69178429E58E4700FFB73D /* PopAnimator.swift in Sources */,
 				BD837B6A29DEBB0D002A8165 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,7 +290,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES_ERROR;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -349,6 +345,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;

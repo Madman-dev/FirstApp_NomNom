@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="G6X-sk-Vfs" customClass="mainViewController" customModule="NomNom" customModuleProvider="target">
-                                <rect key="frame" x="10" y="129" width="373" height="449"/>
+                                <rect key="frame" x="10" y="129" width="373" height="439"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="checked cell" id="ccf-xS-e26" customClass="RetodoTableViewCell" customModule="NomNom" customModuleProvider="target">
@@ -56,9 +56,6 @@
                                                         <constraint firstAttribute="height" constant="30" id="CAb-gh-sF2"/>
                                                         <constraint firstAttribute="width" constant="30" id="Jcm-nW-wwj"/>
                                                     </constraints>
-                                                    <connections>
-                                                        <action selector="checked:" destination="ccf-xS-e26" eventType="valueChanged" id="kpK-s0-Gln"/>
-                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -71,26 +68,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="checkBox" destination="fOL-S7-XKG" id="zDA-FF-BTu"/>
                                             <outlet property="titleLabel" destination="C6n-LI-QZg" id="akT-Vl-T6o"/>
-                                            <segue destination="GcV-5t-qcw" kind="show" identifier="messageSegue" destinationCreationSelector="todoViewController:" id="P8c-JO-zFM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YzN-b4-Br5">
+                                <rect key="frame" x="80" y="648" width="233" height="90"/>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IGh-Nf-B5r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="G6X-sk-Vfs" firstAttribute="centerX" secondItem="bkM-qe-DlL" secondAttribute="centerX" id="27G-n2-q90"/>
-                            <constraint firstItem="IGh-Nf-B5r" firstAttribute="bottom" secondItem="G6X-sk-Vfs" secondAttribute="bottom" constant="240" id="4am-dN-jBS"/>
+                            <constraint firstItem="IGh-Nf-B5r" firstAttribute="bottom" secondItem="G6X-sk-Vfs" secondAttribute="bottom" constant="250" id="4am-dN-jBS"/>
                             <constraint firstItem="G6X-sk-Vfs" firstAttribute="leading" secondItem="IGh-Nf-B5r" secondAttribute="leading" constant="10" id="FiG-jw-Hot"/>
                             <constraint firstItem="G6X-sk-Vfs" firstAttribute="top" secondItem="IGh-Nf-B5r" secondAttribute="top" constant="70" id="Iiu-gi-FHm"/>
+                            <constraint firstItem="YzN-b4-Br5" firstAttribute="top" secondItem="G6X-sk-Vfs" secondAttribute="bottom" constant="80" id="aMn-JC-0za"/>
                             <constraint firstItem="IGh-Nf-B5r" firstAttribute="trailing" secondItem="G6X-sk-Vfs" secondAttribute="trailing" constant="10" id="op2-h0-zlr"/>
+                            <constraint firstItem="IGh-Nf-B5r" firstAttribute="bottom" secondItem="YzN-b4-Br5" secondAttribute="bottom" constant="80" id="xfU-UT-PjQ"/>
+                            <constraint firstItem="YzN-b4-Br5" firstAttribute="leading" secondItem="IGh-Nf-B5r" secondAttribute="leading" constant="80" id="z5U-ZB-MNt"/>
+                            <constraint firstItem="IGh-Nf-B5r" firstAttribute="trailing" secondItem="YzN-b4-Br5" secondAttribute="trailing" constant="80" id="zfW-fL-iTo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title=" " largeTitleDisplayMode="never" id="Znd-Of-cuh"/>
                     <connections>
+                        <outlet property="buttonStack" destination="YzN-b4-Br5" id="AZ3-sP-BDN"/>
                         <outlet property="tableView" destination="G6X-sk-Vfs" id="rV5-lw-Cvg"/>
                     </connections>
                 </viewController>
@@ -99,21 +102,19 @@
             <point key="canvasLocation" x="1712.2137404580153" y="7.746478873239437"/>
         </scene>
         <!--Message View Controller-->
-        <scene sceneID="HxS-Td-huw">
+        <scene sceneID="rgi-jF-sCa">
             <objects>
-                <viewController storyboardIdentifier="messageVC" modalPresentationStyle="overCurrentContext" id="GcV-5t-qcw" customClass="MessageViewController" customModule="NomNom" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="b7n-tz-C8o">
+                <viewController id="fhG-Ko-5Jw" customClass="MessageViewController" customModule="NomNom" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EXl-Ft-Dk3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="169-lV-tbf"/>
+                        <viewLayoutGuide key="safeArea" id="6KC-B2-hKa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="XSM-mm-S11"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="393" height="852"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UE2-P0-91k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W2d-a6-5Am" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2627" y="13"/>
+            <point key="canvasLocation" x="2554.9618320610684" y="7.746478873239437"/>
         </scene>
     </scenes>
     <resources>

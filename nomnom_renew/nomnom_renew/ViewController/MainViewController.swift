@@ -86,6 +86,7 @@ class MainViewController: UIViewController {
         
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
+        tableView.backgroundColor = .clear
     }
     
     func configure() {
@@ -119,10 +120,10 @@ class MainViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.3764705882, green: 0.4235294118, blue: 0.5333333333, alpha: 1)).cgColor,
-                                UIColor(#colorLiteral(red: 0.2470588235, green: 0.2980392157, blue: 0.4196078431, alpha: 1)).cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.1294117647, green: 0.1450980392, blue: 0.1607843137, alpha: 1)).cgColor,
+                                UIColor(#colorLiteral(red: 0.2862745098, green: 0.3137254902, blue: 0.3411764706, alpha: 1)).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.0)
         view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
     }
     
@@ -145,7 +146,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "checked cell", for: indexPath) as! RetodoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "checked cell", for: indexPath) as! TodoTableViewCell
         let todo = todos[indexPath.row]
         cell.set(title: todo.title, checked: todo.isCompleted)
         return cell
@@ -156,7 +157,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             let todo = self.todos[indexPath.row].completeToggled()
             self.todos[indexPath.row] = todo
             
-            let cell = tableView.cellForRow(at: indexPath) as! RetodoTableViewCell
+            let cell = tableView.cellForRow(at: indexPath) as! TodoTableViewCell
             cell.set(checked: todo.isCompleted)
             complete(true)
             print("완료되었습니다.")
