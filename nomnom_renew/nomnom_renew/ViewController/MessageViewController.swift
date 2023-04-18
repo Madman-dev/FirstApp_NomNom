@@ -19,7 +19,7 @@ class MessageViewController: UIViewController {
     
     let messageView = UIView()
     let sendButton = UIButton()
-    let messageField = UITextField()
+    let messageField = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,36 +30,44 @@ class MessageViewController: UIViewController {
         view.addSubview(sendButton)
         
         sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.leadingAnchor.constraint(equalTo: messageView.leadingAnchor, constant: 5).isActive = true
-        sendButton.trailingAnchor.constraint(equalTo: messageView.trailingAnchor, constant: 5).isActive = true
-        sendButton.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: 10).isActive = true
-        sendButton.backgroundColor = .blue
+        sendButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor, constant: 50).isActive = true
+        sendButton.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
+        sendButton.setTitleColor(.black, for: .normal)
+        sendButton.setTitle("Press Here", for: .normal)
+        sendButton.layer.cornerRadius = 15
+        sendButton.backgroundColor = .white
         sendButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
+        messageField.becomeFirstResponder()
         messageField.translatesAutoresizingMaskIntoConstraints = false
-        messageField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        messageField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
-        messageField.backgroundColor = .green
+        messageField.attributedPlaceholder = NSAttributedString(string: "Write Your Todos!",
+                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemPink])
+        messageField.textColor = .black
+        messageField.textAlignment = .center
+        messageField.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
+        messageField.leftAnchor.constraint(equalTo: messageView.leftAnchor).isActive = true
+        messageField.rightAnchor.constraint(equalTo: messageView.rightAnchor).isActive = true
+        messageField.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 50).isActive = true
+        messageField.backgroundColor = .clear
+        
     }
     
-    
     override func viewDidLayoutSubviews() {
-        messageView.backgroundColor = .yellow
-        messageView.layer.cornerRadius = view.layer.bounds.width/15
+        messageView.backgroundColor = .systemPink
+        messageView.layer.cornerRadius = 180/5
         messageView.clipsToBounds = true
         
         messageView.translatesAutoresizingMaskIntoConstraints = false
-        messageView.setDimensions(height: 100, width: 100)
-        messageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true //, constant: 80
-        messageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true // , constant: -80
-        messageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true //, constant: 250
-        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true //, constant: -150
+        messageView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,constant: 20).isActive = true
+        messageView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        messageView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
     /// dismiss everything outside this position
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        if touch?.view != self.messageField //container >> 원래
+        if touch?.view != self.messageView
         { self.dismiss(animated: true)}
     }
     

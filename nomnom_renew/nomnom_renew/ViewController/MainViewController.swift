@@ -8,37 +8,24 @@
 
 import UIKit
 
-
 class MainViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonStack: UIStackView!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var myButtons: [String] = []
+    
     let gradientLayer = CAGradientLayer()
+    
     let presenter = Presenter()
+    
+    let messageVC = MessageViewController()
     
     var todos = [
         Todo(title: "Testing cell"),
         Todo(title: "leaing out a point from behind?")
     ]
-    
-    private let todayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Today"
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        label.textColor = .white
-        return label
-    }()
-    
-    private let monthlyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Monthly"
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        label.textColor = .white
-        return label
-    }()
-    
     
     private let todoButton: UIButton = {
         let bt = UIButton()
@@ -51,7 +38,6 @@ class MainViewController: UIViewController {
         return bt
     }()
 
-    
     private let storageButton: UIButton = {
         let bt = UIButton(type: .custom)
         bt.setImage(UIImage(systemName: "tray"), for: .normal)
@@ -72,7 +58,7 @@ class MainViewController: UIViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             let todo = todos[indexPath.row]
             vc?.todo = todo
-            vc?.presentationController?.delegate = self  // to make selected row not be noticed as to modify >> ...?? if canceled
+            vc?.presentationController?.delegate = self // to make selected row not be noticed as to modify >> ...?? if canceled
         }
         vc?.delegate = self
         return vc
@@ -83,32 +69,33 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         configure()
-        
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
         tableView.backgroundColor = .clear
+        dateCalculator()
     }
     
+    func dateCalculator() {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = .current
+        formatter.locale = .current
+        formatter.dateFormat = "MM/dd at h:mm a"
+        dateLabel.text = formatter.string(from: date)
+    }
+    
+    
     func configure() {
-        let stack = UIStackView(arrangedSubviews: [todayLabel, monthlyLabel])   /// stack 구성은 화면에 올려져야 하기에 property 선언에 함께 되면 X, init or viewDidLoad 형식
-        stack.spacing = 10
-        stack.axis = .horizontal
-        stack.translatesAutoresizingMaskIntoConstraints = false
         todoButton.translatesAutoresizingMaskIntoConstraints = false
         storageButton.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stack)
         buttonStack.addArrangedSubview(todoButton)
         buttonStack.addArrangedSubview(storageButton)
         buttonStack.distribution = .fillEqually
         buttonStack.spacing = 10
         buttonStack.alignment = .center
         buttonStack.axis = .vertical
-        
-
-        stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
-        stack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        
+                
         todoButton.leftAnchor.constraint(equalTo: buttonStack.leftAnchor).isActive = true
         todoButton.rightAnchor.constraint(equalTo: buttonStack.rightAnchor).isActive = true
         
@@ -123,16 +110,13 @@ class MainViewController: UIViewController {
         gradientLayer.colors = [UIColor(#colorLiteral(red: 0.1294117647, green: 0.1450980392, blue: 0.1607843137, alpha: 1)).cgColor,
                                 UIColor(#colorLiteral(red: 0.2862745098, green: 0.3137254902, blue: 0.3411764706, alpha: 1)).cgColor]
         gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
         view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
     }
     
     @objc func TodoButtonTapped(_ sender: UIButton) {
         print("투두 버튼이 눌렸습니다.")
         presenter.present(MessageViewController(), from: self)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//            self.createOverlay()
-//         }
     }
     
     @objc func storageButtonTapped() {

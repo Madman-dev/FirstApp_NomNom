@@ -39,9 +39,9 @@ class Checkbox: UIControl {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        imageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        imageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         
         imageView.image = image

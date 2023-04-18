@@ -83,13 +83,25 @@
                                     <constraint firstAttribute="height" constant="200" id="Xgh-fM-MQM"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZY-vq-agc">
+                                <rect key="frame" x="80" y="69" width="233" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="vx9-7L-jKz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bgc-1R-dhd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="dZY-vq-agc" firstAttribute="leading" secondItem="Bgc-1R-dhd" secondAttribute="leading" constant="80" id="3CE-JN-Weg"/>
                             <constraint firstItem="5PJ-Zb-wFS" firstAttribute="leading" secondItem="Bgc-1R-dhd" secondAttribute="leading" constant="10" id="49N-bp-72P"/>
                             <constraint firstItem="5PJ-Zb-wFS" firstAttribute="top" secondItem="Bgc-1R-dhd" secondAttribute="top" constant="50" id="D6U-Bg-YRD"/>
                             <constraint firstItem="itc-Fx-HUv" firstAttribute="bottom" secondItem="Bgc-1R-dhd" secondAttribute="bottom" constant="-30" id="Dld-7V-BaM"/>
+                            <constraint firstItem="Bgc-1R-dhd" firstAttribute="trailing" secondItem="dZY-vq-agc" secondAttribute="trailing" constant="80" id="EvC-bp-syV"/>
+                            <constraint firstItem="dZY-vq-agc" firstAttribute="top" secondItem="Bgc-1R-dhd" secondAttribute="top" constant="10" id="GRl-Ls-03M"/>
                             <constraint firstItem="Bgc-1R-dhd" firstAttribute="trailing" secondItem="itc-Fx-HUv" secondAttribute="trailing" constant="80" id="OaN-ut-fPm"/>
                             <constraint firstItem="5PJ-Zb-wFS" firstAttribute="centerX" secondItem="gFs-eW-kEN" secondAttribute="centerX" id="Wuj-LA-MUU"/>
                             <constraint firstItem="Bgc-1R-dhd" firstAttribute="trailing" secondItem="5PJ-Zb-wFS" secondAttribute="trailing" constant="10" id="bCD-cu-F07"/>
@@ -99,6 +111,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonStack" destination="itc-Fx-HUv" id="uVp-U9-1Yr"/>
+                        <outlet property="dateLabel" destination="dZY-vq-agc" id="Cey-js-SVq"/>
                         <outlet property="tableView" destination="5PJ-Zb-wFS" id="plt-GO-xLY"/>
                     </connections>
                 </viewController>

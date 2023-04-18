@@ -39,11 +39,11 @@
 ////        messageView.layer.cornerRadius = 180/2
 ////        messageView.clipsToBounds = true
 //        
-////        messageView.translatesAutoresizingMaskIntoConstraints = false
-////        messageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
-////        messageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-////        messageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-////        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        messageView.translatesAutoresizingMaskIntoConstraints = false
+//        messageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
+//        messageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
+//        messageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 //    }
 //    
 //    

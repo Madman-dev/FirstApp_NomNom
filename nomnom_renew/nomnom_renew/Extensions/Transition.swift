@@ -40,10 +40,10 @@ class Transition: NSObject, UIViewControllerAnimatedTransitioning {
         presentedView.translatesAutoresizingMaskIntoConstraints = false
         
         presentedConstraints = [    /// 여기서 등장하는 (다음 view)에 사용되는 영역의 구간을 잡을 수 있다 - 지금은 파란색 타원형 친구 >> 등장할 때의 애니메이션을 담당하네
-            presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor, constant: -60),
-            presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor, constant: 60),
+            presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor),
+            presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor),
             presentedView.topAnchor.constraint(equalTo: context.containerView.topAnchor),
-            presentedView.bottomAnchor.constraint(equalTo: context.containerView.bottomAnchor, constant: 80)  // 여기가 너무 높으면 너무 위로 올라가네
+            presentedView.bottomAnchor.constraint(equalTo: context.containerView.centerYAnchor)  // 여기가 너무 높으면 너무 위로 올라가네
         ]
         
         dismissedConstraints = [    /// 여기서는 등장한!(다음 view)가 복귀하는 구간을 뜻한다... 처음보여지는 view는 어디서 건드리는거지? >>> 초기 screenA에서 건드린다
