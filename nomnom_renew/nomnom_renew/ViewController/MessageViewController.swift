@@ -23,18 +23,19 @@ class MessageViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(white: 1, alpha: 0.5)
+//        view.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        view.backgroundColor = .clear
         
         view.addSubview(messageView)
         view.addSubview(messageField)
         view.addSubview(sendButton)
         
         sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor, constant: 50).isActive = true
+        sendButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor, constant: 100).isActive = true
         sendButton.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
         sendButton.setTitleColor(.black, for: .normal)
         sendButton.setTitle("Press Here", for: .normal)
-        sendButton.layer.cornerRadius = 15
+        sendButton.layer.cornerRadius = 5
         sendButton.backgroundColor = .white
         sendButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
@@ -47,21 +48,21 @@ class MessageViewController: UIViewController {
         messageField.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
         messageField.leftAnchor.constraint(equalTo: messageView.leftAnchor).isActive = true
         messageField.rightAnchor.constraint(equalTo: messageView.rightAnchor).isActive = true
-        messageField.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 50).isActive = true
+        messageField.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 100).isActive = true
         messageField.backgroundColor = .clear
         
     }
     
     override func viewDidLayoutSubviews() {
         messageView.backgroundColor = .systemPink
-        messageView.layer.cornerRadius = 180/5
+        messageView.layer.cornerRadius = 180/10
         messageView.clipsToBounds = true
         
         messageView.translatesAutoresizingMaskIntoConstraints = false
-        messageView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,constant: 20).isActive = true
-        messageView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        messageView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        messageView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,constant: 70).isActive = true
+        messageView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -70).isActive = true
+        messageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive = true
     }
 
     /// dismiss everything outside this position
