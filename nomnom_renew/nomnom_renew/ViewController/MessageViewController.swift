@@ -31,11 +31,13 @@ class MessageViewController: UIViewController {
         view.addSubview(sendButton)
         
         sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor, constant: 100).isActive = true
+        sendButton.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: -30).isActive = true
         sendButton.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
+        sendButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        sendButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         sendButton.setTitleColor(.black, for: .normal)
         sendButton.setTitle("Press Here", for: .normal)
-        sendButton.layer.cornerRadius = 5
+        sendButton.layer.cornerRadius = 10
         sendButton.backgroundColor = .white
         sendButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
@@ -75,10 +77,11 @@ class MessageViewController: UIViewController {
     // every time the button is clicked, it creates new todo and send back to the delegate && with this data I can use this to update the cell, create new one or anything else with it >> 버튼을 누르면 사라지기는 하지만 데이터는 업데이트가 되고 있지 않다 >> THIS HAS TO BE DONE ON TABLEVIEW
 
     @objc func saveTapped(_ sender: UIButton) {
+        print("버튼이 눌렷습니다")
         let todo = Todo(title: messageField.text!)
         delegate?.messageViewController(self, didSaveTodo: todo)
-        print("되돌아가기 버튼이 눌렸습니다.")
         dismiss(animated: true)
     }
+    
 }
 

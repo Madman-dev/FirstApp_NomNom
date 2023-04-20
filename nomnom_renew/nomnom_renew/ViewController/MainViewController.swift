@@ -35,6 +35,7 @@ class MainViewController: UIViewController {
         bt.layer.cornerRadius = bt.frame.height/2
         bt.clipsToBounds = true
         bt.addTarget(self, action: #selector(TodoButtonTapped), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
         return bt
     }()
 
@@ -47,6 +48,7 @@ class MainViewController: UIViewController {
         bt.clipsToBounds = true
         bt.translatesAutoresizingMaskIntoConstraints = false
         bt.addTarget(self, action: #selector(storageButtonTapped), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
         return bt
     }()
 
@@ -116,12 +118,23 @@ class MainViewController: UIViewController {
     
     @objc func TodoButtonTapped(_ sender: UIButton) {
         print("투두 버튼이 눌렸습니다.")
+        self.animateButton(sender)
         presenter.present(MessageViewController(), from: self)
     }
     
     @objc func storageButtonTapped() {
         print("저장 버튼이 눌렸습니다.")
     }
+    
+    @objc func animateButton(_ viewToAnimate: UIView) {
+        UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+            viewToAnimate.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { (_) in
+            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+                viewToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)}, completion: nil)
+        }
+    }
+    
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
