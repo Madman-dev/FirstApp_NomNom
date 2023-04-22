@@ -15,10 +15,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let paddleCategoryName = "paddle"
     let brickCategoryName = "brick"
     
-    let ballCategory: UInt32 = 0x1 << 0
-    let bottomCategory: UInt32 = 0x1 << 1
-    let brickCategory: UInt32 = 0x1 << 2
-    let paddleCategory: UInt32 = 0x1 << 3
+    let ballCategory    : UInt32 = 0x1 << 0
+    let bottomCategory  : UInt32 = 0x1 << 1
+    let brickCategory   : UInt32 = 0x1 << 2
+    let paddleCategory  : UInt32 = 0x1 << 3
+    let BorderCategory  : UInt32 = 0x1 << 4
 
     override init(size: CGSize) {
         super.init(size: size)
@@ -29,13 +30,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundImage.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
         self.addChild(backgroundImage)
         
-        self.physicsWorld.gravity = CGVectorMake(0, 0)
+        physicsWorld.gravity = CGVectorMake(0, 0)   // removes all gravity from scene
         
-        let worldBorder = SKPhysicsBody(edgeLoopFrom: self.frame)
-        self.physicsBody = worldBorder
-        self.physicsBody?.friction = 0
-        
-        let ball = SKSpriteNode(imageNamed: "ball")
+        let ball = SKSpriteNode(imageNamed: "ball") // getting the ball onto scene
         ball.name = ballCategoryName
         ball.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
         ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.frame.size.width/2)
@@ -49,30 +46,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.angularDamping = 0
         ball.physicsBody?.isDynamic = true
         
-        ball.physicsBody?.applyImpulse(CGVectorMake(1, -1))
+        ball.physicsBody?.applyImpulse(CGVectorMake(0, -9.8))   // this gives the push -> gravitational movement
         
         let paddle = SKSpriteNode(imageNamed: "paddle")
         paddle.name = paddleCategoryName
-        paddle.position = CGPointMake(CGRectGetMidX(self.frame), paddle.frame.size.height * 2)
+        paddle.position = CGPointMake(CGRectGetMidX(self.frame), paddle.frame.size.height * 3) // height of paddle
         self.addChild(paddle)
         
         paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.frame.size)
-        paddle.physicsBody?.friction = 0.4
-        paddle.physicsBody?.restitution = 0.1
+        paddle.physicsBody?.friction = 0
+        paddle.physicsBody?.restitution = 1
         paddle.physicsBody?.isDynamic = false   // the paddle doesn't move
         
-        let bottomRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 1)
-        let bottom = SKNode()
-        bottom.physicsBody = SKPhysicsBody(edgeLoopFrom: bottomRect)
-        
-        self.addChild(bottom)
-        
-        bottom.physicsBody?.categoryBitMask = bottomCategory
-        ball.physicsBody?.categoryBitMask = bottomCategory
-        paddle.physicsBody?.categoryBitMask = bottomCategory
-        
-        ball.physicsBody?.contactTestBitMask = bottomCategory | brickCategory
-        
+
+        ball.physicsBody?.categoryBitMask = ballCategory
+        paddle.physicsBody?.categoryBitMask = paddleCategory
+        ball.physicsBody!.contactTestBitMask = bottomCategory | brickCategory
+
         let numberOfRows = 2    // 여기에 todo 데이터를 가지고 올 수 있도록
         let numberOfBricks = 5  // 여기도 바꿀 수 있도록
         let brickWidth = SKSpriteNode(imageNamed: "brick").size.width
@@ -87,9 +77,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case 1:
                     return self.frame.size.height * 0.8
                 case 2:
-                    return self.frame.size.height * 0.6
-                case 3:
-                    return self.frame.size.height * 0.4
+                    return self.frame.size.height * 0.7
+//                case 3:
+//                    return self.frame.size.height * 0.2
                 default:
                     return 0
                 }
@@ -98,8 +88,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for index in 1 ... numberOfBricks {
                 let brick = SKSpriteNode(imageNamed: "brick")
                 
-                let calc1: Float = Float(index) - 0.5
-                let calc2: Float = Float(index) - 1
+                let calc1: Float = Float(index) - 1
+                let calc2: Float = Float(index) - 3
                 
                 brick.position =
                 CGPointMake(CGFloat(calc1 * Float(brick.frame.size.width) + calc2 * padding + offset), yOffset)
@@ -116,7 +106,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
-        <#code#>
+        let borderBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        borderBody.friction = 0
+        self.physicsBody = borderBody
+
+        
+        let bottomRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 1)
+        let bottom = SKNode()
+        bottom.physicsBody = SKPhysicsBody(edgeLoopFrom: bottomRect)
+        addChild(bottom)
+        
+        bottom.physicsBody?.categoryBitMask = bottomCategory
+        
+        
+        let paddle = childNode(withName: paddleCategoryName) as! SKSpriteNode
+        bottom.physicsBody!.categoryBitMask = bottomCategory
+        borderBody.categoryBitMask = BorderCategory
     }
     
     func isGameCompleted() -> Bool {
@@ -136,38 +141,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         super.init(coder: aDecoder)
     }
 
+    /// code that gets touch and uses it to find location on screen where the touch occurred.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch! = touches.first
-        let touchLocation = touch.location(in: self)
+        let touch = touches.first
+        let touchLocation = touch!.location(in: self)
         
-        let body: SKPhysicsBody? = self.physicsWorld.body(at: touchLocation)
-        if body?.node?.name == paddleCategoryName {
-            print("패들이 눌렸습니다.")
-            fingerIsOnPaddle = true
+        if let body = physicsWorld.body(at: touchLocation) {
+            if body.node!.name == paddleCategoryName {
+                print("패들이 눌렸습니다.")
+                fingerIsOnPaddle = true
+            }
+            
         }
-        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if fingerIsOnPaddle {
-            let touch: UITouch! = touches.first
-            let touchLoc = touch.location(in: self)
-            let prevTouchLoc = touch.previousLocation(in: self)
+            /// touch가 일어난 포인트를 알아야하니, 1) 현재 터치 부분 2) 이전 터치 부분으로 나뉘어 확인
+            let touch = touches.first
+            let touchLocation = touch!.location(in: self)
+            let prevTouchLocation = touch!.previousLocation(in: self)
             
-            let paddle = self.childNode(withName: paddleCategoryName) as! SKSpriteNode
+            let paddle = childNode(withName: paddleCategoryName) as! SKSpriteNode
             
-            var newXPos = paddle.position.x + (touchLoc.x - prevTouchLoc.x)
-            paddle.position = CGPointMake(newXPos, position.y)
+            /// 이 부분이 이해 안돼요... >>> paddle.position.x를 더하는 이유는 단순히 터치를 한 영역에서 현재 터치 영역을 뺀, 대략적인 값을 구하는게 아니라 - 절대적으로 존재하는 paddle 위치를 알려주어야 하기에!
+            var paddleX = paddle.position.x + (touchLocation.x - prevTouchLocation.x)
             
-            newXPos = max(newXPos, paddle.size.width/2)
-            newXPos = min(newXPos, self.size.width - paddle.size.width / 2)
+            /// 이 부분이 min & max인 이유가 화면 범위 밖으로 내보내지 않도록 하는 거구나!
+            paddleX = max(paddleX, paddle.size.width / 2)
+            paddleX = min(paddleX, self.size.width - paddle.size.width / 2)
+            
+            paddle.position = CGPoint(x: paddleX, y: paddle.position.y)
         }
     }
     
-    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-         fingerIsOnPaddle = false
+        /// touch가 끝났으니까 false로 변동
+        fingerIsOnPaddle = false
     }
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody()
