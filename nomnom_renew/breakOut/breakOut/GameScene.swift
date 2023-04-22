@@ -39,14 +39,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(ball)
 
         ball.physicsBody?.allowsRotation = false
-        ball.physicsBody?.affectedByGravity = true
+//        ball.physicsBody?.affectedByGravity = true
         ball.physicsBody?.friction = 0
         ball.physicsBody?.restitution = 1
         ball.physicsBody?.linearDamping = 0
         ball.physicsBody?.angularDamping = 0
-        ball.physicsBody?.isDynamic = true
+//        ball.physicsBody?.isDynamic = true
         
-        ball.physicsBody?.applyImpulse(CGVectorMake(0, -9.8))   // this gives the push -> gravitational movement
+        ball.physicsBody?.applyImpulse(CGVectorMake(10, -10))   // this gives the push -> gravitational movement
         
         let paddle = SKSpriteNode(imageNamed: "paddle")
         paddle.name = paddleCategoryName
@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.frame.size)
         paddle.physicsBody?.friction = 0
-        paddle.physicsBody?.restitution = 1
+        paddle.physicsBody?.restitution = 1.5
         paddle.physicsBody?.isDynamic = false   // the paddle doesn't move
         
 
@@ -63,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.physicsBody?.categoryBitMask = paddleCategory
         ball.physicsBody!.contactTestBitMask = bottomCategory | brickCategory
 
-        let numberOfRows = 2    // 여기에 todo 데이터를 가지고 올 수 있도록
+        let numberOfRows = 3    // 여기에 todo 데이터를 가지고 올 수 있도록
         let numberOfBricks = 5  // 여기도 바꿀 수 있도록
         let brickWidth = SKSpriteNode(imageNamed: "brick").size.width
         let padding: Float = 5
