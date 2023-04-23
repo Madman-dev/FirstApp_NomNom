@@ -15,6 +15,14 @@
 		BD39B00F29F287F700E75C87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD39B00D29F287F700E75C87 /* Main.storyboard */; };
 		BD39B01129F287F800E75C87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD39B01029F287F800E75C87 /* Assets.xcassets */; };
 		BD39B01429F287F800E75C87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD39B01229F287F800E75C87 /* LaunchScreen.storyboard */; };
+		BD8D264329F56546004769EF /* BrokenPlatform.sks in Resources */ = {isa = PBXBuildFile; fileRef = BD8D264229F56546004769EF /* BrokenPlatform.sks */; };
+		BD8D264629F5692B004769EF /* WaitingForTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8D264529F5692B004769EF /* WaitingForTap.swift */; };
+		BD8D264829F5693C004769EF /* Playing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8D264729F5693C004769EF /* Playing.swift */; };
+		BD8D264A29F56943004769EF /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8D264929F56943004769EF /* GameOver.swift */; };
+		BD8D265129F57827004769EF /* BambooBreak.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D264C29F57826004769EF /* BambooBreak.wav */; };
+		BD8D265229F57827004769EF /* paddleBlip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D264D29F57826004769EF /* paddleBlip.wav */; };
+		BD8D265429F57827004769EF /* game-over.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D264F29F57827004769EF /* game-over.wav */; };
+		BD8D265529F57827004769EF /* pongblip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D265029F57827004769EF /* pongblip.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +35,14 @@
 		BD39B00E29F287F700E75C87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD39B01029F287F800E75C87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD39B01329F287F800E75C87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BD8D264229F56546004769EF /* BrokenPlatform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrokenPlatform.sks; sourceTree = "<group>"; };
+		BD8D264529F5692B004769EF /* WaitingForTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForTap.swift; sourceTree = "<group>"; };
+		BD8D264729F5693C004769EF /* Playing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playing.swift; sourceTree = "<group>"; };
+		BD8D264929F56943004769EF /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		BD8D264C29F57826004769EF /* BambooBreak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BambooBreak.wav; sourceTree = "<group>"; };
+		BD8D264D29F57826004769EF /* paddleBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paddleBlip.wav; sourceTree = "<group>"; };
+		BD8D264F29F57827004769EF /* game-over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "game-over.wav"; sourceTree = "<group>"; };
+		BD8D265029F57827004769EF /* pongblip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pongblip.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +75,9 @@
 		BD39B00229F287F700E75C87 /* breakOut */ = {
 			isa = PBXGroup;
 			children = (
+				BD8D264129F56510004769EF /* particles */,
+				BD8D264429F5691C004769EF /* GameState */,
+				BD8D264B29F5780E004769EF /* Sounds */,
 				BD39B00329F287F700E75C87 /* AppDelegate.swift */,
 				BD39B00529F287F700E75C87 /* GameScene.sks */,
 				BD39B00729F287F700E75C87 /* Actions.sks */,
@@ -69,6 +88,35 @@
 				BD39B01229F287F800E75C87 /* LaunchScreen.storyboard */,
 			);
 			path = breakOut;
+			sourceTree = "<group>";
+		};
+		BD8D264129F56510004769EF /* particles */ = {
+			isa = PBXGroup;
+			children = (
+				BD8D264229F56546004769EF /* BrokenPlatform.sks */,
+			);
+			path = particles;
+			sourceTree = "<group>";
+		};
+		BD8D264429F5691C004769EF /* GameState */ = {
+			isa = PBXGroup;
+			children = (
+				BD8D264529F5692B004769EF /* WaitingForTap.swift */,
+				BD8D264729F5693C004769EF /* Playing.swift */,
+				BD8D264929F56943004769EF /* GameOver.swift */,
+			);
+			path = GameState;
+			sourceTree = "<group>";
+		};
+		BD8D264B29F5780E004769EF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				BD8D264C29F57826004769EF /* BambooBreak.wav */,
+				BD8D264F29F57827004769EF /* game-over.wav */,
+				BD8D264D29F57826004769EF /* paddleBlip.wav */,
+				BD8D265029F57827004769EF /* pongblip.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,9 +178,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD39B00F29F287F700E75C87 /* Main.storyboard in Resources */,
+				BD8D265529F57827004769EF /* pongblip.wav in Resources */,
+				BD8D265429F57827004769EF /* game-over.wav in Resources */,
+				BD8D264329F56546004769EF /* BrokenPlatform.sks in Resources */,
 				BD39B00629F287F700E75C87 /* GameScene.sks in Resources */,
+				BD8D265229F57827004769EF /* paddleBlip.wav in Resources */,
 				BD39B01129F287F800E75C87 /* Assets.xcassets in Resources */,
 				BD39B01429F287F800E75C87 /* LaunchScreen.storyboard in Resources */,
+				BD8D265129F57827004769EF /* BambooBreak.wav in Resources */,
 				BD39B00829F287F700E75C87 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,8 +198,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD39B00A29F287F700E75C87 /* GameScene.swift in Sources */,
+				BD8D264629F5692B004769EF /* WaitingForTap.swift in Sources */,
 				BD39B00C29F287F700E75C87 /* GameViewController.swift in Sources */,
+				BD8D264A29F56943004769EF /* GameOver.swift in Sources */,
 				BD39B00429F287F700E75C87 /* AppDelegate.swift in Sources */,
+				BD8D264829F5693C004769EF /* Playing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

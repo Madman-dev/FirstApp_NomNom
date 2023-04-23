@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ball.png",
+      "filename" : "TapToPlay.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ball@2x.png",
+      "filename" : "TapToPlay@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ball@3x.png",
+      "filename" : "TapToPlay@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
