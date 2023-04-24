@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "ball.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ball@2x.png",
+      "filename" : "image-removebg-preview-2-7.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ball@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

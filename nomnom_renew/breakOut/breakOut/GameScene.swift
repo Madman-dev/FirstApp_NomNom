@@ -111,7 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for index in 1 ... numberOfBricks {
                 let brick = SKSpriteNode(imageNamed: "brick")
                 
-                let calc1: Float = Float(index) + 1.2
+                let calc1: Float = Float(index) - 0.15
                 //                let calc2: Float = Float(index) - 2
                 
                 brick.position =

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD22C14729F6618C00B5AD1E /* pongblip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD22C14629F6618C00B5AD1E /* pongblip.wav */; };
+		BD22C14929F661AA00B5AD1E /* paddleBlip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD22C14829F661AA00B5AD1E /* paddleBlip.wav */; };
 		BD39B00429F287F700E75C87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39B00329F287F700E75C87 /* AppDelegate.swift */; };
 		BD39B00629F287F700E75C87 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BD39B00529F287F700E75C87 /* GameScene.sks */; };
 		BD39B00829F287F700E75C87 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = BD39B00729F287F700E75C87 /* Actions.sks */; };
@@ -20,12 +22,12 @@
 		BD8D264829F5693C004769EF /* Playing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8D264729F5693C004769EF /* Playing.swift */; };
 		BD8D264A29F56943004769EF /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8D264929F56943004769EF /* GameOver.swift */; };
 		BD8D265129F57827004769EF /* BambooBreak.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D264C29F57826004769EF /* BambooBreak.wav */; };
-		BD8D265229F57827004769EF /* paddleBlip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D264D29F57826004769EF /* paddleBlip.wav */; };
 		BD8D265429F57827004769EF /* game-over.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D264F29F57827004769EF /* game-over.wav */; };
-		BD8D265529F57827004769EF /* pongblip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD8D265029F57827004769EF /* pongblip.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD22C14629F6618C00B5AD1E /* pongblip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pongblip.wav; sourceTree = "<group>"; };
+		BD22C14829F661AA00B5AD1E /* paddleBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paddleBlip.wav; sourceTree = "<group>"; };
 		BD39B00029F287F700E75C87 /* breakOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = breakOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD39B00329F287F700E75C87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD39B00529F287F700E75C87 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -40,9 +42,7 @@
 		BD8D264729F5693C004769EF /* Playing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playing.swift; sourceTree = "<group>"; };
 		BD8D264929F56943004769EF /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		BD8D264C29F57826004769EF /* BambooBreak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BambooBreak.wav; sourceTree = "<group>"; };
-		BD8D264D29F57826004769EF /* paddleBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paddleBlip.wav; sourceTree = "<group>"; };
 		BD8D264F29F57827004769EF /* game-over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "game-over.wav"; sourceTree = "<group>"; };
-		BD8D265029F57827004769EF /* pongblip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pongblip.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +113,8 @@
 			children = (
 				BD8D264C29F57826004769EF /* BambooBreak.wav */,
 				BD8D264F29F57827004769EF /* game-over.wav */,
-				BD8D264D29F57826004769EF /* paddleBlip.wav */,
-				BD8D265029F57827004769EF /* pongblip.wav */,
+				BD22C14629F6618C00B5AD1E /* pongblip.wav */,
+				BD22C14829F661AA00B5AD1E /* paddleBlip.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -178,15 +178,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD39B00F29F287F700E75C87 /* Main.storyboard in Resources */,
-				BD8D265529F57827004769EF /* pongblip.wav in Resources */,
 				BD8D265429F57827004769EF /* game-over.wav in Resources */,
 				BD8D264329F56546004769EF /* BrokenPlatform.sks in Resources */,
 				BD39B00629F287F700E75C87 /* GameScene.sks in Resources */,
-				BD8D265229F57827004769EF /* paddleBlip.wav in Resources */,
 				BD39B01129F287F800E75C87 /* Assets.xcassets in Resources */,
 				BD39B01429F287F800E75C87 /* LaunchScreen.storyboard in Resources */,
 				BD8D265129F57827004769EF /* BambooBreak.wav in Resources */,
+				BD22C14929F661AA00B5AD1E /* paddleBlip.wav in Resources */,
 				BD39B00829F287F700E75C87 /* Actions.sks in Resources */,
+				BD22C14729F6618C00B5AD1E /* pongblip.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
