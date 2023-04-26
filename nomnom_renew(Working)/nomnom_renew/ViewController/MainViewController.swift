@@ -130,12 +130,24 @@ class MainViewController: UIViewController {
     @objc func storageButtonTapped() {
         print("저장 버튼이 눌렸습니다.")
         
+//        let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
+////        let gameVC = storyboard?.instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
+//        gameVC.modalPresentationStyle = .fullScreen
+        
         let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
-//        let gameVC = storyboard?.instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
-        gameVC.modalPresentationStyle = .fullScreen
-        DispatchQueue.main.async {
-            self.getTopMostViewController()?.present(gameVC, animated: true, completion: nil)
+        
+        if let presentedVC = self.presentedViewController {
+            presentedVC.dismiss(animated: false) {
+                self.present(gameVC, animated: true)
+            }
         }
+       
+        gameVC.modalPresentationStyle = .fullScreen
+        
+        self.present(gameVC, animated: true)
+//        DispatchQueue.main.async {
+//            self.getTopMostViewController()?.present(gameVC, animated: true, completion: nil)
+//        }
         /// 시간 텀을 두어야 하는걸까?
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 //            let gameVC = breakOutViewController()
@@ -154,14 +166,14 @@ class MainViewController: UIViewController {
     }
     
     
-    func getTopMostViewController() -> UIViewController? {
-        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
-        
-        while let presentedViewController = topMostViewController?.presentedViewController {
-            topMostViewController = presentedViewController
-        }
-        return topMostViewController
-    }
+//    func getTopMostViewController() -> UIViewController? {
+//        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
+//
+//        while let presentedViewController = topMostViewController?.presentedViewController {
+//            topMostViewController = presentedViewController
+//        }
+//        return topMostViewController
+//    }
     
 }
 

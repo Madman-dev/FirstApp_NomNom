@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD8E949229F9197A00532610 /* AVFAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8E949029F9197A00532610 /* AVFAudio.framework */; };
+		BD8E949929F919FD00532610 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8E949829F919FD00532610 /* AVFoundation.framework */; };
 		BD94867B29ED548B00FEF546 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94867A29ED548B00FEF546 /* AppDelegate.swift */; };
 		BD94867D29ED548B00FEF546 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94867C29ED548B00FEF546 /* SceneDelegate.swift */; };
 		BD94867F29ED548B00FEF546 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94867E29ED548B00FEF546 /* MainViewController.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		BD67F90529F811F700A0AE52 /* nomnom_renew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nomnom_renew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD8E949029F9197A00532610 /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = System/Library/Frameworks/AVFAudio.framework; sourceTree = SDKROOT; };
+		BD8E949829F919FD00532610 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BD94867A29ED548B00FEF546 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD94867C29ED548B00FEF546 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BD94867E29ED548B00FEF546 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -59,7 +63,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD8E949929F919FD00532610 /* AVFoundation.framework in Frameworks */,
 				BDE2DDED29F7E1BB000F494A /* breakOutFramework.framework in Frameworks */,
+				BD8E949229F9197A00532610 /* AVFAudio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +139,8 @@
 		BDE2DDEC29F7E1BB000F494A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD8E949829F919FD00532610 /* AVFoundation.framework */,
+				BD8E949029F9197A00532610 /* AVFAudio.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
