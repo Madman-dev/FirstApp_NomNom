@@ -39,19 +39,40 @@ class Transition: NSObject, UIViewControllerAnimatedTransitioning {
         context.containerView.addSubview(presentedView) /// transition을 할 떄 담아주는 친구잖아
         presentedView.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        
+        presentedConstraints = [
+            presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor),
+            presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor),
+            presentedView.topAnchor.constraint(equalTo: context.containerView.topAnchor),
+            presentedView.bottomAnchor.constraint(equalTo: context.containerView.centerYAnchor, constant: 100)
+        ]
+        
+        dismissedConstraints = [
+            presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor, constant: 60),
+            presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor, constant: -60),
+            presentedView.topAnchor.constraint(equalTo: context.containerView.centerYAnchor),
+            presentedView.bottomAnchor.constraint(equalTo: context.containerView.bottomAnchor, constant: 700)
+        ]
+        
+        /* ⏲️기존 present
         presentedConstraints = [    /// 여기서 등장하는 (다음 view)에 사용되는 영역의 구간을 잡을 수 있다 - 지금은 파란색 타원형 친구 >> 등장할 때의 애니메이션을 담당하네
             presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor, constant: -60),
             presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor, constant: 60),
             presentedView.topAnchor.constraint(equalTo: context.containerView.topAnchor),
             presentedView.bottomAnchor.constraint(equalTo: context.containerView.centerYAnchor, constant: 100)  // 여기가 너무 높으면 너무 위로 올라가네
         ]
+         ============== */
         
+        
+        /* ⏲️기존 dismiss
         dismissedConstraints = [    /// 여기서는 등장한!(다음 view)가 복귀하는 구간을 뜻한다... 처음보여지는 view는 어디서 건드리는거지? >>> 초기 screenA에서 건드린다
             presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor),// 여기 때문에 등장할 때와 복귀할 때 이상한 것
             presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor),
             presentedView.topAnchor.constraint(equalTo: context.containerView.centerYAnchor, constant: 400),
             presentedView.bottomAnchor.constraint(equalTo: context.containerView.bottomAnchor, constant: 200)
         ]
+        ======================== */
         
         /// 가장 먼저 선언한 NSLayoutConstraint 배열에 dismiss와 present를 건드리는 것 (배열 속에 담아 두는 거네)⭐️
         NSLayoutConstraint.activate(dismissedConstraints)
@@ -85,7 +106,7 @@ class Transition: NSObject, UIViewControllerAnimatedTransitioning {
             withDuration: transitionDuration(using: context),
             delay: 0,
             usingSpringWithDamping: 1,    /// bounce 효과가 있네 - 0에 가까울수록 효과X
-            initialSpringVelocity: 4,
+            initialSpringVelocity: 5,
             options: .curveEaseInOut,
             animations: {
                 context.containerView.setNeedsLayout()

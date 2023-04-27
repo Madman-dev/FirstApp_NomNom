@@ -61,10 +61,17 @@ class MessageViewController: UIViewController {
         messageView.clipsToBounds = true
         
         messageView.translatesAutoresizingMaskIntoConstraints = false
+        messageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        messageView.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -155).isActive = true
+        messageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+        
+        /* ⏲️기존 messageView -> error 수치 조정 중
         messageView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,constant: 70).isActive = true
         messageView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -70).isActive = true
         messageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
         messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive = true
+         ==================== */
     }
 
     /// dismiss everything outside this position

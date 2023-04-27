@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD48141529FAB723008425A8 /* paddleBlip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141129FAB723008425A8 /* paddleBlip.wav */; };
+		BD48141629FAB723008425A8 /* game-over.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141229FAB723008425A8 /* game-over.wav */; };
+		BD48141729FAB723008425A8 /* BambooBreak.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141329FAB723008425A8 /* BambooBreak.wav */; };
+		BD48141829FAB723008425A8 /* pongblip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141429FAB723008425A8 /* pongblip.wav */; };
 		BD8E949229F9197A00532610 /* AVFAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8E949029F9197A00532610 /* AVFAudio.framework */; };
 		BD8E949929F919FD00532610 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8E949829F919FD00532610 /* AVFoundation.framework */; };
 		BD94867B29ED548B00FEF546 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94867A29ED548B00FEF546 /* AppDelegate.swift */; };
@@ -37,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD48141129FAB723008425A8 /* paddleBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = paddleBlip.wav; path = nomnom_renew/Sounds/paddleBlip.wav; sourceTree = SOURCE_ROOT; };
+		BD48141229FAB723008425A8 /* game-over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "game-over.wav"; path = "nomnom_renew/Sounds/game-over.wav"; sourceTree = SOURCE_ROOT; };
+		BD48141329FAB723008425A8 /* BambooBreak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = BambooBreak.wav; path = nomnom_renew/Sounds/BambooBreak.wav; sourceTree = SOURCE_ROOT; };
+		BD48141429FAB723008425A8 /* pongblip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pongblip.wav; path = nomnom_renew/Sounds/pongblip.wav; sourceTree = SOURCE_ROOT; };
 		BD67F90529F811F700A0AE52 /* nomnom_renew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nomnom_renew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8E949029F9197A00532610 /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = System/Library/Frameworks/AVFAudio.framework; sourceTree = SDKROOT; };
 		BD8E949829F919FD00532610 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -72,6 +80,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD48140F29FAB70F008425A8 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				BD48141329FAB723008425A8 /* BambooBreak.wav */,
+				BD48141229FAB723008425A8 /* game-over.wav */,
+				BD48141129FAB723008425A8 /* paddleBlip.wav */,
+				BD48141429FAB723008425A8 /* pongblip.wav */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		BD94866E29ED548B00FEF546 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +109,7 @@
 				BD94869A29ED559700FEF546 /* Extensions */,
 				BD94869329ED556000FEF546 /* Models */,
 				BD94869029ED550A00FEF546 /* ViewController */,
+				BD48140F29FAB70F008425A8 /* Sound */,
 				BD94868029ED548B00FEF546 /* Main.storyboard */,
 				BD94868329ED548C00FEF546 /* Assets.xcassets */,
 				BD94868829ED548C00FEF546 /* Info.plist */,
@@ -219,8 +239,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD48141629FAB723008425A8 /* game-over.wav in Resources */,
 				BD94868429ED548C00FEF546 /* Assets.xcassets in Resources */,
+				BD48141529FAB723008425A8 /* paddleBlip.wav in Resources */,
+				BD48141729FAB723008425A8 /* BambooBreak.wav in Resources */,
 				BD94868229ED548B00FEF546 /* Main.storyboard in Resources */,
+				BD48141829FAB723008425A8 /* pongblip.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
