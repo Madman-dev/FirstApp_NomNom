@@ -52,7 +52,7 @@ class Transition: NSObject, UIViewControllerAnimatedTransitioning {
             presentedView.leftAnchor.constraint(equalTo: context.containerView.leftAnchor, constant: 60),
             presentedView.rightAnchor.constraint(equalTo: context.containerView.rightAnchor, constant: -60),
             presentedView.topAnchor.constraint(equalTo: context.containerView.centerYAnchor),
-            presentedView.bottomAnchor.constraint(equalTo: context.containerView.bottomAnchor, constant: 700)
+            presentedView.bottomAnchor.constraint(equalTo: context.containerView.bottomAnchor, constant: 900)
         ]
         
         /* ⏲️기존 present

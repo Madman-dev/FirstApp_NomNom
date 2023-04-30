@@ -7,13 +7,20 @@
 
 import UIKit
 
+protocol TodoTableViewCellDelegate: AnyObject {
+    func todoTableViewCell(_ cell: TodoTableViewCell, didChangeCheckedState checked: Bool)
+}
+
 class TodoTableViewCell: UITableViewCell {
+    weak var delegate: TodoTableViewCellDelegate?
+
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkBox: Checkbox!
     
     @IBAction func checked(_ sender: Checkbox) {
         updateChecked()
+        delegate?.todoTableViewCell(self, didChangeCheckedState: checkBox.checked)
     }
     
     func set(title: String, checked: Bool) {

@@ -37,20 +37,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="checked cell" id="eeH-I3-E9N" customClass="TodoTableViewCell" customModule="nomnom_renew" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="373" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="373" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eeH-I3-E9N" id="5vM-Cq-LGz">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsI-Iy-COz">
-                                                    <rect key="frame" x="10" y="11.000000000000002" width="303" height="21.666666666666671"/>
+                                                    <rect key="frame" x="10" y="11" width="303" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFB-8w-Tzn" customClass="Checkbox" customModule="nomnom_renew" customModuleProvider="target">
-                                                    <rect key="frame" x="323" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="323" y="6.6666666666666679" width="30" height="30.000000000000004"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="64w-P5-NzC"/>
@@ -73,6 +73,7 @@
                                         <connections>
                                             <outlet property="checkBox" destination="nFB-8w-Tzn" id="g9m-Pt-HB2"/>
                                             <outlet property="titleLabel" destination="ZsI-Iy-COz" id="2V0-tL-kHO"/>
+                                            <segue destination="JPh-dI-1q5" kind="show" identifier="messageSegue" destinationCreationSelector="todoViewController:" id="I6X-hi-3Nd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -124,11 +125,12 @@
             <objects>
                 <viewController storyboardIdentifier="messageVC" id="JPh-dI-1q5" customClass="MessageViewController" customModule="nomnom_renew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H05-7X-RKl">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="9hq-mU-XiG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="EA7-VI-gUw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGd-Y5-RrQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,18 +13,15 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonStack: UIStackView!
     @IBOutlet weak var dateLabel: UILabel!
-    
-    var myButtons: [String] = []
-    
+
     let gradientLayer = CAGradientLayer()
-    
     let presenter = Presenter()
-    
-    let messageVC = MessageViewController()
+//    let messageVC = MessageViewController()
     
     var todos = [
         Todo(title: "Testing cell"),
-        Todo(title: "leaing out a point from behind?")
+        Todo(title: "leaping out a point from behind?"),
+        Todo(title: "값 저장이 왜 안될까?")
     ]
     
     private let todoButton: UIButton = {
@@ -35,7 +32,7 @@ class MainViewController: UIViewController {
         bt.layer.cornerRadius = bt.frame.height/2
         bt.clipsToBounds = true
         bt.addTarget(self, action: #selector(TodoButtonTapped), for: .touchUpInside)
-        bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)   // 버튼 튕김 효과
         return bt
     }()
 
@@ -52,7 +49,6 @@ class MainViewController: UIViewController {
         return bt
     }()
 
-
     // 👀 message >> 이건 어떤 코드? >> connecting the tableViewCell to the 2nd VC messageField ⭐️⭐️⭐️⭐️
     @IBSegueAction func todoViewController(_ coder: NSCoder) -> MessageViewController? {
         let vc = MessageViewController(coder: coder)
@@ -60,9 +56,9 @@ class MainViewController: UIViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             let todo = todos[indexPath.row]
             vc?.todo = todo
-            vc?.presentationController?.delegate = self // to make selected row not be noticed as to modify >> ...?? if canceled
         }
         vc?.delegate = self
+        vc?.presentationController?.delegate = self // to make selected row not be noticed as to modify >> ...?? if canceled >>>> this code is for when you do not wish have cell maintain touched - after dragged down - in terms of segue
         return vc
     }
     
@@ -125,6 +121,7 @@ class MainViewController: UIViewController {
         print("투두 버튼이 눌렸습니다.")
         self.animateButton(sender)
         presenter.present(MessageViewController(), from: self)
+        performSegue(withIdentifier: "messageSegue", sender: self)
     }
     
     @objc func storageButtonTapped() {
@@ -165,17 +162,23 @@ class MainViewController: UIViewController {
         }
     }
     
-    
-//    func getTopMostViewController() -> UIViewController? {
-//        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
-//
-//        while let presentedViewController = topMostViewController?.presentedViewController {
-//            topMostViewController = presentedViewController
-//        }
-//        return topMostViewController
-//    }
-    
+    @IBAction func startEditing(_ sender: Any) {
+        tableView.isEditing = !tableView.isEditing
+    }
 }
+
+extension MainViewController: TodoTableViewCellDelegate {
+    func todoTableViewCell(_ cell: TodoTableViewCell, didChangeCheckedState checked: Bool) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        let todo = todos[indexPath.row]
+        let newTodo = Todo(title: todo.title, isCompleted: checked)
+        
+        todos[indexPath.row] = newTodo
+    }
+}
+
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,6 +187,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "checked cell", for: indexPath) as! TodoTableViewCell
+        cell.delegate = self
         let todo = todos[indexPath.row]
         cell.set(title: todo.title, checked: todo.isCompleted)
         return cell
@@ -213,15 +217,18 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let todo = todos.remove(at: sourceIndexPath.row)    // 기존에 있던 위치에서 ⭐️🙋🏻‍♂️
-        todos.insert(todo, at: destinationIndexPath.row)    // 변경되는 위치로 이동을 시키는 것
-    }
+    ///🔥 지금은 reordering을 적용하지 않을 것이기 때문에 제외
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        let todo = todos.remove(at: sourceIndexPath.row)    // 기존에 있던 위치에서 ⭐️🙋🏻‍♂️
+//        todos.insert(todo, at: destinationIndexPath.row)    // 변경되는 위치로 이동을 시키는 것
+//    }
 }
 
 /// ⭐️ 여기서 데이터 업데이트를 다루고 있다!! ⭐️
 extension MainViewController: MessageViewControllerDelegate {
+
     func messageViewController(_ vc: MessageViewController, didSaveTodo todo: Todo) {
+
         dismiss(animated: true) {    // Not dismissed automatically - thus need to do manually
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 // update!! 🔥
