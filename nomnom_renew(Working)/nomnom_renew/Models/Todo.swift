@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Todo: Equatable{
+struct Todo: Equatable {
     let title: String
     let isCompleted: Bool
     
@@ -21,3 +21,11 @@ struct Todo: Equatable{
         return Todo(title: title, isCompleted: !isCompleted)
     }
 }
+
+/// 타입으로 지정을 해야하는구나... - todo를 만들기 좋은 구성이 enum일줄은 몰랐네
+enum Section: Int, CaseIterable {
+    case complete = 0, incomplete
+}
+
+var completeTodo: [Todo] = []
+var incompleteTodo: [Todo] = []

@@ -13,15 +13,23 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonStack: UIStackView!
     @IBOutlet weak var dateLabel: UILabel!
-
-//    let gradientLayer = CAGradientLayer()
+    
+    //    let gradientLayer = CAGradientLayer()
     let presenter = Presenter()
+    var section = [Section]()
+    var todo = [Todo]()
     
     var todos = [
         Todo(title: "Testing cell"),
         Todo(title: "leaping out a point from behind?"),
         Todo(title: "값 저장이 왜 안될까?")
     ]
+    
+    /// Todo 속에서 이미 checked로 구분할 수 있을 줄 알았는데 - 이 방식이 더 좋은 건가? 🙋🏻‍♂️
+    //    var sectionData: [Section] = [
+    //        .complete,
+    //        .incomplete
+    //    ]
     
     private let todoButton: UIButton = {
         let bt = UIButton()
@@ -35,7 +43,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)   // 버튼 튕김 효과
         return bt
     }()
-
+    
     private let storageButton: UIButton = {
         let bt = UIButton(type: .custom)
         bt.setImage(UIImage(systemName: "tray"), for: .normal)
@@ -50,11 +58,11 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
         return bt
     }()
-
+    
     // 👀 message >> 이건 어떤 코드? >> connecting the tableViewCell to the 2nd VC messageField ⭐️⭐️⭐️⭐️
     @IBSegueAction func todoViewController(_ coder: NSCoder) -> MessageViewController? {
         let vc = MessageViewController(coder: coder)
-
+        
         if let indexPath = tableView.indexPathForSelectedRow {
             let todo = todos[indexPath.row]
             vc?.todo = todo
@@ -89,7 +97,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         
     }
     
-    
     func configure() {
         todoButton.translatesAutoresizingMaskIntoConstraints = false
         storageButton.translatesAutoresizingMaskIntoConstraints = false
@@ -100,24 +107,13 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         buttonStack.spacing = 10
         buttonStack.alignment = .center
         buttonStack.axis = .vertical
-                
+        
         todoButton.leftAnchor.constraint(equalTo: buttonStack.leftAnchor).isActive = true
         todoButton.rightAnchor.constraint(equalTo: buttonStack.rightAnchor).isActive = true
         
         storageButton.rightAnchor.constraint(equalTo: buttonStack.rightAnchor).isActive = true
         storageButton.bottomAnchor.constraint(equalTo: buttonStack.bottomAnchor).isActive = true
     }
-    
-//    override func viewWillLayoutSubviews() {  /// 🙋🏻‍♂️still covers the app - why? > called too late?
-//        super.viewWillLayoutSubviews()
-//
-//        gradientLayer.frame = view.bounds
-//        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.1294117647, green: 0.1450980392, blue: 0.1607843137, alpha: 1)).cgColor,
-//                                UIColor(#colorLiteral(red: 0.2862745098, green: 0.3137254902, blue: 0.3411764706, alpha: 1)).cgColor]
-//        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
-//        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
-//        view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
-//    }
     
     @objc func TodoButtonTapped(_ sender: UIButton) {
         print("투두 버튼이 눌렸습니다.")
@@ -139,19 +135,10 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
                 self.present(gameVC, animated: true)
             }
         }
-       
+        
         gameVC.modalPresentationStyle = .fullScreen
         
         self.present(gameVC, animated: true)
-//        DispatchQueue.main.async {
-//            self.getTopMostViewController()?.present(gameVC, animated: true, completion: nil)
-//        }
-        /// 시간 텀을 두어야 하는걸까?
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            let gameVC = breakOutViewController()
-//            gameVC.present(gameVC, animated: true)
-//        }
-        
     }
     
     @objc func animateButton(_ viewToAnimate: UIView) {
@@ -182,11 +169,58 @@ extension MainViewController: TodoTableViewCellDelegate {
 
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Section.allCases.count   // 🙋🏻‍♂️ enum으로 만들었는데 모든 값을 계산해야하니까?
+    }
+    
+    /// 이 부분은 section 별로 제목을 붙여주는 거고
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        switch Section(rawValue: section) {
+        case .complete:
+            return "완료"
+        case .incomplete:
+            return "미완료"
+        default:
+            return nil
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // section 별로 구분할 수 있도록 정리 - complete && incomplete
+//        switch Section(rawValue: section) {  /// 🙋🏻‍♂️이건 왜...?
+//        case .complete:
+//            return completeTodo.count
+//        case .incomplete:
+//            return incompleteTodo.count
+//        case .none:     /// case .default가 아니어도 되네?
+//            return 0
+//        }
         return todos.count
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /// 🙋🏻‍♂️ 이전에 지정한 cell이 필요한 이유는 checked cell을 사용하기 위해서 >>>> 다시 보니까 굳이 명칭을 이렇게 하지 않아도 되긴하네..?
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "checked cell", for: indexPath) as! TodoTableViewCell
+//        let todo: Todo
+//
+//        switch Section(rawValue: indexPath.section) {
+//        case .complete:
+//            todo = completeTodo[indexPath.row]
+//        case .incomplete:
+//            todo = incompleteTodo[indexPath.row]
+//        case .none:
+//            fatalError("No section is needed")
+//        }
+//
+//        cell.titleLabel.text = todo.title
+//        cell.checkBox.checked = todo.isCompleted
+//        return cell
+        
+        /// ⏲️ 이전 방식으로 잠시 돌아오는걸로~
         let cell = tableView.dequeueReusableCell(withIdentifier: "checked cell", for: indexPath) as! TodoTableViewCell
         cell.delegate = self
         let todo = todos[indexPath.row]
@@ -195,7 +229,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "완료") { action, view, complete in
+        let action = UIContextualAction(style: .normal, title: "Done") { action, view, complete in
             let todo = self.todos[indexPath.row].completeToggled()
             self.todos[indexPath.row] = todo
             
@@ -218,16 +252,17 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-//    🔥 지금은 reordering을 적용하지 않을 것이기 때문에 제외
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let todo = todos.remove(at: sourceIndexPath.row)    // 기존에 있던 위치에서 ⭐️🙋🏻‍♂️
-        todos.insert(todo, at: destinationIndexPath.row)    // 변경되는 위치로 이동을 시키는 것
-    }
+    //    🔥 지금은 reordering을 적용하지 않을 것이기 때문에 제외
+    //    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    //        let todo = todos.remove(at: sourceIndexPath.row)    // 기존에 있던 위치에서 ⭐️🙋🏻‍♂️
+    //        todos.insert(todo, at: destinationIndexPath.row)    // 변경되는 위치로 이동을 시키는 것
+    //    }
 }
 
 /// ⭐️ 여기서 데이터 업데이트를 다루고 있다!! ⭐️
 extension MainViewController: MessageViewControllerDelegate {
     
+    ///custom Transition 적용하기 위한 코드 적용된 상황
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let todo = todos[indexPath.row]
         let messageVC = MessageViewController()
@@ -239,7 +274,8 @@ extension MainViewController: MessageViewControllerDelegate {
     }
     
     func messageViewController(_ vc: MessageViewController, didSaveTodo todo: Todo) {
-
+        
+        /// 정확하게 이 코드는 custom transition으로 띄운 textField에 값을 넣으면 대입하는 걸로 기억해... 근데 나는 넣을 뿐만 아니라 코드를 불러야한단 말이지?
         dismiss(animated: true) {    // Not dismissed automatically - thus need to do manually
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 // update!! 🔥 >> custom transition을 사용하면 이게 없어지는거 아닌가?
@@ -251,7 +287,22 @@ extension MainViewController: MessageViewControllerDelegate {
                 self.tableView.insertRows(at: [IndexPath(row: self.todos.count-1, section: 0)], with: .automatic)
             }
         }
-     }
+    }
+    /// 그래서 여기서 완료 미 완료를 확인하고 옮기는 걸로 적용해보는 걸로
+    func toggleComplete(for task: Todo) {
+        if task.isCompleted {
+            if let index = incompleteTodo.firstIndex(of: task) {
+                incompleteTodo.remove(at: index)
+                completeTodo.append(task)
+            }
+        } else {
+            if let index = completeTodo.firstIndex(of: task) {
+                completeTodo.remove(at: index)
+                incompleteTodo.append(task)
+            }
+        }
+        tableView.reloadData()
+    }
 }
 
 extension MainViewController: UIAdaptivePresentationControllerDelegate {
