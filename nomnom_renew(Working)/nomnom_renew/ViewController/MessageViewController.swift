@@ -87,11 +87,13 @@ class MessageViewController: UIViewController {
         
         let todo = Todo(title: messageField.text!)
         delegate?.messageViewController(self, didSaveTodo: todo)
-        
-//        dismiss(animated: true)
-        
+        dismiss(animated: true)
             // 저장하려고 하는 텍스트가 저장되지 않는다
     }
     
 }
+
+
+
+
 

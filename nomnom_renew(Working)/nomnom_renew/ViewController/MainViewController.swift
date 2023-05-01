@@ -16,7 +16,6 @@ class MainViewController: UIViewController {
 
     let gradientLayer = CAGradientLayer()
     let presenter = Presenter()
-//    let messageVC = MessageViewController()
     
     var todos = [
         Todo(title: "Testing cell"),
@@ -56,26 +55,23 @@ class MainViewController: UIViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             let todo = todos[indexPath.row]
             vc?.todo = todo
+            vc?.presentationController?.delegate = self // to make selected row not be noticed as to modify >> ...?? if canceled >>>> this code is for when you do not wish have cell maintain touched - after dragged down - in terms of segue
         }
         vc?.delegate = self
-        vc?.presentationController?.delegate = self // to make selected row not be noticed as to modify >> ...?? if canceled >>>> this code is for when you do not wish have cell maintain touched - after dragged down - in terms of segue
         return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configure()
         tableView.delegate = self
         tableView.dataSource = self
-        configure()
+        
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
         tableView.backgroundColor = .clear
         dateCalculator()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     func dateCalculator() {
@@ -119,17 +115,16 @@ class MainViewController: UIViewController {
     
     @objc func TodoButtonTapped(_ sender: UIButton) {
         print("투두 버튼이 눌렸습니다.")
+        let messageVC = MessageViewController()
+        
+        /// ⭐️ 이 부분이 있기 때문에 todo 버튼을 누르고 다음 화면으로 넘어갔을 때 데이터를 전달 받을 수 있는건가 ⭐️
+        messageVC.delegate = self
         self.animateButton(sender)
-        presenter.present(MessageViewController(), from: self)
-        performSegue(withIdentifier: "messageSegue", sender: self)
+        presenter.present(messageVC, from: self)
     }
     
     @objc func storageButtonTapped() {
         print("저장 버튼이 눌렸습니다.")
-        
-//        let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
-////        let gameVC = storyboard?.instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
-//        gameVC.modalPresentationStyle = .fullScreen
         
         let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
         
@@ -231,7 +226,7 @@ extension MainViewController: MessageViewControllerDelegate {
 
         dismiss(animated: true) {    // Not dismissed automatically - thus need to do manually
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                // update!! 🔥
+                // update!! 🔥 >> custom transition을 사용하면 이게 없어지는거 아닌가?
                 self.todos[indexPath.row] = todo // 여기에서 todo를 스코프 내에 찾지 못하는 문제가 있었는데 - parameter을 제대로 확인하지 않아서 발생한 문제
                 self.tableView.reloadRows(at: [indexPath], with: .none)
             } else {

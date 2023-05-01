@@ -73,7 +73,6 @@
                                         <connections>
                                             <outlet property="checkBox" destination="nFB-8w-Tzn" id="g9m-Pt-HB2"/>
                                             <outlet property="titleLabel" destination="ZsI-Iy-COz" id="2V0-tL-kHO"/>
-                                            <segue destination="JPh-dI-1q5" kind="show" identifier="messageSegue" destinationCreationSelector="todoViewController:" id="I6X-hi-3Nd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -114,6 +113,7 @@
                         <outlet property="buttonStack" destination="itc-Fx-HUv" id="uVp-U9-1Yr"/>
                         <outlet property="dateLabel" destination="dZY-vq-agc" id="Cey-js-SVq"/>
                         <outlet property="tableView" destination="5PJ-Zb-wFS" id="plt-GO-xLY"/>
+                        <segue destination="JPh-dI-1q5" kind="show" identifier="messageVCSegue" id="Fub-4S-LSK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCY-i1-dK4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
