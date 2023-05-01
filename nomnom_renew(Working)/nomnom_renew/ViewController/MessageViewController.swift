@@ -32,9 +32,8 @@ class MessageViewController: UIViewController {
 
         messageField.becomeFirstResponder()
         messageField.translatesAutoresizingMaskIntoConstraints = false
-        messageField.attributedPlaceholder = NSAttributedString(string: "Write Your Todos!",
+        messageField.attributedPlaceholder = NSAttributedString(string: "24자 이내로 투두를 작성해보세요!",
                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        
         messageField.textColor = .white
         messageField.textAlignment = .center
         messageField.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
@@ -58,7 +57,7 @@ class MessageViewController: UIViewController {
         saveButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         saveButton.setTitleColor(.black, for: .normal)
-        saveButton.setTitle("맞아?", for: .normal)
+        saveButton.setTitle("더하기", for: .normal)
         saveButton.layer.cornerRadius = 10
         saveButton.backgroundColor = .white
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
@@ -88,7 +87,7 @@ class MessageViewController: UIViewController {
         let todo = Todo(title: messageField.text!)
         delegate?.messageViewController(self, didSaveTodo: todo)
         dismiss(animated: true)
-            // 저장하려고 하는 텍스트가 저장되지 않는다
+            // 저장하려고 하는 텍스트가 저장되지 않는다 >> done! 이건 한번 더 봐라.... 진짜....
     }
     
 }

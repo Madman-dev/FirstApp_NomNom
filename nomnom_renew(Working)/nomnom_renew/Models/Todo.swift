@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Todo {
+struct Todo: Equatable{
     let title: String
     let isCompleted: Bool
     

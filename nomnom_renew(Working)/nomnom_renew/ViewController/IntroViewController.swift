@@ -10,14 +10,14 @@ import UIKit
 class IntroViewController: UIViewController {
 
     private let imageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
-        imageView.image = UIImage(named: "Logo")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        imageView.image = UIImage(named: "Logo2")
         return imageView
     }()
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        view.backgroundColor = .black
+        view.backgroundColor = .white
     }
     
     override func viewDidLoad() {

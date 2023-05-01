@@ -8,13 +8,13 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonStack: UIStackView!
     @IBOutlet weak var dateLabel: UILabel!
 
-    let gradientLayer = CAGradientLayer()
+//    let gradientLayer = CAGradientLayer()
     let presenter = Presenter()
     
     var todos = [
@@ -25,8 +25,9 @@ class MainViewController: UIViewController {
     
     private let todoButton: UIButton = {
         let bt = UIButton()
-        bt.backgroundColor = .red
-        bt.setTitle("Press Here", for: .normal)
+        bt.backgroundColor = .systemPink
+        bt.setTitle("NOM", for: .normal)
+        bt.titleLabel?.font = UIFont.systemFont(ofSize: 40, weight: .heavy)
         bt.frame.size = CGSize(width: 100, height: 40)
         bt.layer.cornerRadius = bt.frame.height/2
         bt.clipsToBounds = true
@@ -39,6 +40,8 @@ class MainViewController: UIViewController {
         let bt = UIButton(type: .custom)
         bt.setImage(UIImage(systemName: "tray"), for: .normal)
         bt.backgroundColor = .white
+        bt.layer.borderWidth = 0.2
+        bt.layer.borderColor = UIColor.gray.cgColor
         bt.frame.size = CGSize(width: 250, height: 40)
         bt.layer.cornerRadius = bt.frame.height/2
         bt.clipsToBounds = true
@@ -63,6 +66,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         
         configure()
         tableView.delegate = self
@@ -81,6 +85,8 @@ class MainViewController: UIViewController {
         formatter.locale = .current
         formatter.dateFormat = "MM/dd at h:mm a"
         dateLabel.text = formatter.string(from: date)
+        dateLabel.font = UIFont.systemFont(ofSize: 30, weight: .black)
+        
     }
     
     
@@ -102,16 +108,16 @@ class MainViewController: UIViewController {
         storageButton.bottomAnchor.constraint(equalTo: buttonStack.bottomAnchor).isActive = true
     }
     
-    override func viewWillLayoutSubviews() {  /// 🙋🏻‍♂️still covers the app - why? > called too late?
-        super.viewWillLayoutSubviews()
-        
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.1294117647, green: 0.1450980392, blue: 0.1607843137, alpha: 1)).cgColor,
-                                UIColor(#colorLiteral(red: 0.2862745098, green: 0.3137254902, blue: 0.3411764706, alpha: 1)).cgColor]
-        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
-        view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
-    }
+//    override func viewWillLayoutSubviews() {  /// 🙋🏻‍♂️still covers the app - why? > called too late?
+//        super.viewWillLayoutSubviews()
+//
+//        gradientLayer.frame = view.bounds
+//        gradientLayer.colors = [UIColor(#colorLiteral(red: 0.1294117647, green: 0.1450980392, blue: 0.1607843137, alpha: 1)).cgColor,
+//                                UIColor(#colorLiteral(red: 0.2862745098, green: 0.3137254902, blue: 0.3411764706, alpha: 1)).cgColor]
+//        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+//        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+//        view.layer.insertSublayer(gradientLayer, at: 0) /// 그동안 문제를 일으켰던 이유는 background를 부르는 시점이 너무 느렸다는 점
+//    }
     
     @objc func TodoButtonTapped(_ sender: UIButton) {
         print("투두 버튼이 눌렸습니다.")
@@ -212,16 +218,26 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    ///🔥 지금은 reordering을 적용하지 않을 것이기 때문에 제외
-//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        let todo = todos.remove(at: sourceIndexPath.row)    // 기존에 있던 위치에서 ⭐️🙋🏻‍♂️
-//        todos.insert(todo, at: destinationIndexPath.row)    // 변경되는 위치로 이동을 시키는 것
-//    }
+//    🔥 지금은 reordering을 적용하지 않을 것이기 때문에 제외
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let todo = todos.remove(at: sourceIndexPath.row)    // 기존에 있던 위치에서 ⭐️🙋🏻‍♂️
+        todos.insert(todo, at: destinationIndexPath.row)    // 변경되는 위치로 이동을 시키는 것
+    }
 }
 
 /// ⭐️ 여기서 데이터 업데이트를 다루고 있다!! ⭐️
 extension MainViewController: MessageViewControllerDelegate {
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let todo = todos[indexPath.row]
+        let messageVC = MessageViewController()
+        messageVC.delegate = self
+        messageVC.todo = todo
+        messageVC.modalPresentationStyle = .custom
+        messageVC.transitioningDelegate = self
+        presenter.present(messageVC, from: self)
+    }
+    
     func messageViewController(_ vc: MessageViewController, didSaveTodo todo: Todo) {
 
         dismiss(animated: true) {    // Not dismissed automatically - thus need to do manually
