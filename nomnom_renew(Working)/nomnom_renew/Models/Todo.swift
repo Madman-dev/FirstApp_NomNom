@@ -7,9 +7,11 @@
 
 import UIKit
 
+let mainVC = MainViewController()
+
 struct Todo: Equatable {
-    let title: String
-    let isCompleted: Bool
+    var title: String
+    var isCompleted: Bool
     
     init(title: String, isCompleted: Bool = false) {
         self.title = title
@@ -27,5 +29,10 @@ enum Section: Int, CaseIterable {
     case complete = 0, incomplete
 }
 
-var completeTodo: [Todo] = []
-var incompleteTodo: [Todo] = []
+var completedTodos = mainVC.todos.filter{$0.isCompleted}
+var completeCounts = String(completedTodos.count)
+
+//var completedTodo: [Todo] = []
+//var incompletedTodo: [Todo] = []
+
+

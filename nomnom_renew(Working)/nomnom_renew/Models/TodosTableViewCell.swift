@@ -13,7 +13,8 @@ protocol TodoTableViewCellDelegate: AnyObject {
 
 class TodoTableViewCell: UITableViewCell {
     weak var delegate: TodoTableViewCellDelegate?
-
+    let mainVC = MainViewController()
+    
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkBox: Checkbox!
@@ -46,4 +47,17 @@ class TodoTableViewCell: UITableViewCell {
         titleLabel.attributedText = attributedString
     }
     
+//    func updateTodoCompletionStatus(at index: Int, completed: Bool) {
+//        mainVC.todos[index].isCompleted = completed
+//
+//        mainVC.todos.sort { (todo1, todo2) -> Bool in
+//            if todo1.isCompleted == todo2.isCompleted {
+//                return todo1.title < todo2.title
+//            } else {
+//                return !todo1.isCompleted
+//            }
+//        }
+//        mainVC.tableView.reloadData()
+//    }
+//
 }
