@@ -36,20 +36,20 @@
                                 <rect key="frame" x="10" y="119" width="373" height="449"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="checked cell" id="eeH-I3-E9N" customClass="TodoTableViewCell" customModule="nomnom_renew" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="373" height="43.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="50" width="373" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eeH-I3-E9N" id="5vM-Cq-LGz">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsI-Iy-COz">
-                                                    <rect key="frame" x="10" y="10.999999999999998" width="303" height="21.333333333333329"/>
+                                                    <rect key="frame" x="10" y="11.000000000000002" width="303" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFB-8w-Tzn" customClass="Checkbox" customModule="nomnom_renew" customModuleProvider="target">
-                                                    <rect key="frame" x="323" y="6.6666666666666679" width="30" height="30.000000000000004"/>
+                                                    <rect key="frame" x="323" y="7" width="30" height="30"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="64w-P5-NzC"/>

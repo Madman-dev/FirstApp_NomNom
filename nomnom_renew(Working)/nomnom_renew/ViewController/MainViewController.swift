@@ -15,21 +15,23 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var dateLabel: UILabel!
     
     //    let gradientLayer = CAGradientLayer()
+    let defaults = UserDefaults.standard
     let presenter = Presenter()
     var section = [Section]()
+    let messageVC = MessageViewController()
     
+    /// creating sample todos
     var todos = [
-        Todo(title: "Testing cell"),
-        Todo(title: "leaping out a point from behind?"),
-        Todo(title: "값 저장이 왜 안될까?")
+        Todo(title: "이렇게?", isCompleted: false),
+        Todo(title: "두번째 제작?", isCompleted: true)
     ]
-        
-    //    var todos = [
-    //        Todo(title: "Testing cell", isCompleted: true),
-    //        Todo(title: "leaping out a point from behind?", isCompleted: false),
-    //        Todo(title: "값 저장이 왜 안될까?", isCompleted: false)
-    //    ]
     
+    struct Keys {
+        static let todoName = "todoName"
+    }
+    
+    
+    // need to define key to use and store data
     /// Todo 속에서 이미 checked로 구분할 수 있을 줄 알았는데 - 이 방식이 더 좋은 건가? 🙋🏻‍♂️
     //    var sectionData: [Section] = [
     //        .complete,
@@ -44,7 +46,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         bt.frame.size = CGSize(width: 250, height: 40)
         bt.layer.cornerRadius = bt.frame.height/2
         bt.clipsToBounds = true
-        bt.addTarget(self, action: #selector(TodoButtonTapped), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(todoButtonTapped), for: .touchUpInside)
         bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)   // 버튼 튕김 효과
         return bt
     }()
@@ -70,7 +72,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         label.frame.size = CGSize(width: 250, height: 40)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = completeCounts
+        label.text = "10"
         label.textColor = .systemPink
         label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         return label
@@ -92,6 +94,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        loadTodos()
         
         configureView()
         tableView.delegate = self
@@ -136,10 +139,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         trackLabel.centerYAnchor.constraint(equalTo: storageButton.centerYAnchor).isActive = true
     }
     
-    @objc func TodoButtonTapped(_ sender: UIButton) {
+    @objc func todoButtonTapped(_ sender: UIButton) {
         print("2nd VC 출력")
-        
-        let messageVC = MessageViewController()
         /// ⭐️ 이 부분이 있기 때문에 todo 버튼을 누르고 다음 화면으로 넘어갔을 때 데이터를 전달 받을 수 있는건가 ⭐️ >> YES!
         messageVC.delegate = self
         
@@ -168,6 +169,31 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         }) { (_) in
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
                 viewToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)}, completion: nil)
+        }
+    }
+    
+    /// 새로운 todo를 저장하는 메서드
+    func saveTodos() {
+//        defaults.set(messageVC.messageField.text!, forKey: Keys.todoName)
+//        defaults.set(todos, forKey: "todos")    // 🙋🏻‍♂️ 이방식으로도 저장은 불가능 -> 내가 저장하려고 하는 타입이 Todo 타입이기 때문에 UserDefault에서 건드릴 수 있는 범위를 벗어난 것이라고 한다. String, Int, Array, Date 등이 저장되어야 한다고~
+        let encoder = JSONEncoder()
+        if let encodedTodos = try?encoder.encode(todos) {
+            defaults.set(encodedTodos, forKey: "todos")
+        }
+    }
+    
+    /// 저장된 todo를 불러오는 방식 - using Decoder since Todo is NOT a type of String, a custom type
+    func loadTodos() {
+        if let savedTodos = defaults.object(forKey: "todos") as? Data {
+            let decoder = JSONDecoder()
+            if let decodedTodos = try?decoder.decode([Todo].self, from: savedTodos) {
+                todos = decodedTodos
+            }
+//        if let savedTodos = UserDefaults.standard.array(forKey: "todos") as? [Todo] {
+//            todos = savedTodos
+            /// 2nd VC에 이렇게 접근하는 방식 자체가 잘못된 것
+            //        let todo = defaults.value(forKey: Keys.todoName) as? String ?? ""
+            //        messageVC.messageField.text = todo
         }
     }
     
@@ -373,10 +399,12 @@ extension MainViewController: MessageViewControllerDelegate {
                 self.todos[indexPath.row] = todo // 여기에서 todo를 스코프 내에 찾지 못하는 문제가 있었는데 - parameter을 제대로 확인하지 않아서 발생한 문제
                 self.tableView.reloadRows(at: [indexPath], with: .none)
             } else {
+                let newEntry = [todo]
                 // create new!!
                 self.todos.append(todo)
                 self.tableView.insertRows(at: [IndexPath(row: self.todos.count-1, section: 0)], with: .automatic)
             }
+            //self.saveTodos()
         }
     }
     /// 그래서 여기서 완료 미 완료를 확인하고 옮기는 걸로 적용해보는 걸로
@@ -399,7 +427,7 @@ extension MainViewController: MessageViewControllerDelegate {
 extension MainViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: true)
+            tableView .deselectRow(at: indexPath, animated: true)
         }
     }
 }
