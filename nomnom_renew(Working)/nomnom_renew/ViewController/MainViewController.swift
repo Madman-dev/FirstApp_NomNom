@@ -17,19 +17,21 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     //    let gradientLayer = CAGradientLayer()
     let defaults = UserDefaults.standard
     let presenter = Presenter()
-    var section = [Section]()
+//    var section = [Section]()
     let messageVC = MessageViewController()
     
     /// creating sample todos
-    var todos = [
-        Todo(title: "이렇게?", isCompleted: false),
-        Todo(title: "두번째 제작?", isCompleted: true)
+    var todos: [Todo] = [
+        Todo(title: "저장된 투두는 밤 11시 59분에 리셋됩니다.", isCompleted: false),
+        Todo(title: "오늘 완료할 투두를 24자 이내로 작성하세요!", isCompleted: false)
     ]
+//        Todo(title: "이렇게?", isCompleted: false),
+//        Todo(title: "두번째 제작?", isCompleted: false)
+//    ]
     
     struct Keys {
         static let todoName = "todoName"
     }
-    
     
     // need to define key to use and store data
     /// Todo 속에서 이미 checked로 구분할 수 있을 줄 알았는데 - 이 방식이 더 좋은 건가? 🙋🏻‍♂️
@@ -95,7 +97,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewDidLoad()
         view.backgroundColor = .white
         loadTodos()
-        
+        scheduleReset()
+
         configureView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -176,9 +179,19 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     func saveTodos() {
 //        defaults.set(messageVC.messageField.text!, forKey: Keys.todoName)
 //        defaults.set(todos, forKey: "todos")    // 🙋🏻‍♂️ 이방식으로도 저장은 불가능 -> 내가 저장하려고 하는 타입이 Todo 타입이기 때문에 UserDefault에서 건드릴 수 있는 범위를 벗어난 것이라고 한다. String, Int, Array, Date 등이 저장되어야 한다고~
-        let encoder = JSONEncoder()
-        if let encodedTodos = try?encoder.encode(todos) {
-            defaults.set(encodedTodos, forKey: "todos")
+
+        //        let encoder = JSONEncoder()
+//        if let encodedTodos = try?encoder.encode(todos) {
+//            defaults.set(encodedTodos, forKey: "todos")
+//            defaults.synchronize()
+//        }
+        
+        do {
+            let data = try JSONEncoder().encode(todos)
+            defaults.set(data, forKey: "todos")
+            defaults.synchronize()
+        } catch {
+            print("에러가 발생했습니다 \(error)")
         }
     }
     
@@ -195,6 +208,22 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
             //        let todo = defaults.value(forKey: Keys.todoName) as? String ?? ""
             //        messageVC.messageField.text = todo
         }
+    }
+    
+    @objc func resetTodos() {
+        defaults.removeObject(forKey: "todos")
+        defaults.synchronize()
+    }
+    
+    func scheduleReset() {
+        let calender = Calendar(identifier: .gregorian)
+        let now = Date()
+        let todayAtMidnight = calender.startOfDay(for: now) /// 정확한가?
+        let resetDate = calender.date(byAdding: .day, value: 1, to: todayAtMidnight)!
+        let resetTime = calender.date(bySettingHour: 21, minute: 00, second: 00, of: resetDate)!
+        
+        let timer = Timer(fireAt: resetTime, interval: 0, target: self, selector: #selector(resetTodos), userInfo: nil, repeats: false)
+        RunLoop.main.add(timer, forMode: .common)
     }
     
     //    @IBAction func startEditing(_ sender: Any) {    /// 🙋🏻‍♂️ 이 친구는 어떤 역할을 하는지 한번 더 봐야한다
@@ -228,9 +257,10 @@ extension MainViewController: TodoTableViewCellDelegate {
         
         let todo = todos[indexPath.row]
         let newTodo = Todo(title: todo.title, isCompleted: checked)
-        
         todos[indexPath.row] = newTodo
         
+        /// 여기에 업데이트 상황을 확인해야하는데 없어서 못하는거였나?
+        saveTodos()
     }
      /// 생각했던 것보다 더 복잡하게 운영이 되는 코드... 이건 한번 더 체크 + 적용을 하는게 좋을지 한번 더 확인해보자
 //        todos[indexPath.row].isCompleted = checked
@@ -267,7 +297,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         /// 이 친구는 고정 ⭐️
         //    func numberOfSections(in tableView: UITableView) -> Int {
-        ////        return Section.allCases.count   // 🙋🏻‍♂️ enum으로 만들었는데 모든 값을 계산해야하니까?
+        ///        return Section.allCases.count   // 🙋🏻‍♂️ enum으로 만들었는데 모든 값을 계산해야하니까?
         //        return 1
         //    }
         
@@ -302,6 +332,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         /// ⏲️ 이전 방식으로 잠시 돌아오는걸로~
         let cell = tableView.dequeueReusableCell(withIdentifier: "checked cell", for: indexPath) as! TodoTableViewCell
+        cell.delegate = self
         cell.delegate = self
         let todos = todos[indexPath.row]
         cell.set(title: todos.title, checked: todos.isCompleted)
@@ -355,6 +386,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             complete(true)
             print("완료되었습니다.")
         }
+        saveTodos()
         return UISwipeActionsConfiguration(actions: [action]) // 왜 이렇게 되지?
     }
     
@@ -368,6 +400,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        saveTodos()
     }
     //    🔥 지금은 reordering을 적용하지 않을 것이기 때문에 제외
     //    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -395,16 +428,15 @@ extension MainViewController: MessageViewControllerDelegate {
         /// 정확하게 이 코드는 custom transition으로 띄운 textField에 값을 넣으면 대입하는 걸로 기억해... 근데 나는 넣을 뿐만 아니라 코드를 불러야한단 말이지?
         dismiss(animated: true) {    // Not dismissed automatically - thus need to do manually
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                // update!! 🔥 >> custom transition을 사용하면 이게 없어지는거 아닌가?
+                // update!! 🔥 >> custom transition을 사용하면 이게 없어지는거 아닌가? >>> NO
                 self.todos[indexPath.row] = todo // 여기에서 todo를 스코프 내에 찾지 못하는 문제가 있었는데 - parameter을 제대로 확인하지 않아서 발생한 문제
                 self.tableView.reloadRows(at: [indexPath], with: .none)
             } else {
-                let newEntry = [todo]
                 // create new!!
                 self.todos.append(todo)
                 self.tableView.insertRows(at: [IndexPath(row: self.todos.count-1, section: 0)], with: .automatic)
             }
-            //self.saveTodos()
+            self.saveTodos()
         }
     }
     /// 그래서 여기서 완료 미 완료를 확인하고 옮기는 걸로 적용해보는 걸로
