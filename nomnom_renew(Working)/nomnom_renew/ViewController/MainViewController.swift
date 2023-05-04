@@ -17,7 +17,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     //    let gradientLayer = CAGradientLayer()
     let defaults = UserDefaults.standard
     let presenter = Presenter()
-//    var section = [Section]()
     let messageVC = MessageViewController()
     
     /// creating sample todos
@@ -25,16 +24,20 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         Todo(title: "저장된 투두는 밤 11시 59분에 리셋됩니다.", isCompleted: false),
         Todo(title: "오늘 완료할 투두를 24자 이내로 작성하세요!", isCompleted: false)
     ]
-//        Todo(title: "이렇게?", isCompleted: false),
-//        Todo(title: "두번째 제작?", isCompleted: false)
-//    ]
+
+//    struct Keys {
+//        static let todoName = "todoName"
+//    }
     
-    struct Keys {
-        static let todoName = "todoName"
+    var totalCount: Int {
+        return todos.count
     }
     
-    // need to define key to use and store data
-    /// Todo 속에서 이미 checked로 구분할 수 있을 줄 알았는데 - 이 방식이 더 좋은 건가? 🙋🏻‍♂️
+    var completedTodos: Int {
+        return todos.filter({ $0.isCompleted }).count
+    }
+    
+    /// Todo 속에서 이미 checked로 구분할 수 있을 줄 알았는데 - 이 방식이 더 좋은 건가? 🙋🏻‍♂️ >> Section으로 구분하는건 포기
     //    var sectionData: [Section] = [
     //        .complete,
     //        .incomplete
@@ -55,7 +58,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     private let storageButton: UIButton = {
         let bt = UIButton(type: .custom)
-//        bt.setImage(UIImage(systemName: "tray"), for: .normal)
         bt.backgroundColor = .white
         bt.layer.borderWidth = 0.2
         bt.layer.borderColor = UIColor.gray.cgColor
@@ -74,7 +76,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         label.frame.size = CGSize(width: 250, height: 40)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "10"
         label.textColor = .systemPink
         label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         return label
@@ -97,7 +98,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewDidLoad()
         view.backgroundColor = .white
         loadTodos()
-        scheduleReset()
+        
+//        trackLabel.text = "\(completedTodos)"
 
         configureView()
         tableView.delegate = self
@@ -107,6 +109,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         tableView.clipsToBounds = true
         tableView.backgroundColor = .clear
         dateCalculator()
+        scheduleReset()
     }
     
     func dateCalculator() {
@@ -117,7 +120,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         formatter.dateFormat = "MM/dd at h:mm a"
         dateLabel.text = formatter.string(from: date)
         dateLabel.font = UIFont.systemFont(ofSize: 30, weight: .black)
-        
     }
     
     func configureView() {
@@ -225,7 +227,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         let timer = Timer(fireAt: resetTime, interval: 0, target: self, selector: #selector(resetTodos), userInfo: nil, repeats: false)
         RunLoop.main.add(timer, forMode: .common)
     }
-    
+        
     //    @IBAction func startEditing(_ sender: Any) {    /// 🙋🏻‍♂️ 이 친구는 어떤 역할을 하는지 한번 더 봐야한다
     //        tableView.isEditing = !tableView.isEditing
     //    }
@@ -258,6 +260,8 @@ extension MainViewController: TodoTableViewCellDelegate {
         let todo = todos[indexPath.row]
         let newTodo = Todo(title: todo.title, isCompleted: checked)
         todos[indexPath.row] = newTodo
+        
+        trackLabel.text = "\(completedTodos)"
         
         /// 여기에 업데이트 상황을 확인해야하는데 없어서 못하는거였나?
         saveTodos()

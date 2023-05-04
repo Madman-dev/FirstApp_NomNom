@@ -29,16 +29,6 @@ enum Section: Int, CaseIterable {
     case complete = 0, incomplete
 }
 
-//let newTodo = [
-//    Todo(title: "이렇게?", isCompleted: false),
-//    Todo(title: "두번째 제작?", isCompleted: true)
-//]
 
-//var completedTodos = mainVC.todos.filter{$0.isCompleted}
-//var completedCounts = completedTodos.count
-
-
-//var completedTodo: [Todo] = []
-//var incompletedTodo: [Todo] = []
 
 
