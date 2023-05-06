@@ -15,10 +15,10 @@ class breakOutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /// 아래와 같이 구현을 했을 때는 강제로 구현을 하게 되면서 발생하는 문제점들이 많다는 점! seperately하게 될 경우, 발생하는 문제가 없다고 한다~ (WHY.... Oh WHY....)
+        // let skView = self.view as! SKView
         let skView = SKView()
         view = skView
-        /// 아래와 같이 구현을 했을 때는 강제로 구현을 하게 되면서 발생하는 문제점들이 많다는 점! seperately하게 될 경우, 발생하는 문제가 없다고 한다~ (WHY.... Oh WHY....)
-//        let skView = self.view as! SKView
         
         if skView.scene == nil {
             skView.showsFPS = true

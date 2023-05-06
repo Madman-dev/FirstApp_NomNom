@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SpriteKit
+import breakOutFramework
 
 class MainViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
@@ -22,7 +24,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     /// creating sample todos
     var todos: [Todo] = [
         Todo(title: "저장된 투두는 밤 11시 59분에 리셋됩니다.", isCompleted: false),
-        Todo(title: "오늘 완료할 투두를 24자 이내로 작성하세요!", isCompleted: false)
+        Todo(title: "오늘 완료할 투두를 24자 이내로 작성하세요!", isCompleted: false),
+        Todo(title: "투두를 완료할수록 놀이도 더 커집니다!", isCompleted: false)
     ]
 
 //    struct Keys {
@@ -33,7 +36,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         return todos.count
     }
     
-    var completedTodos: Int {
+    public var completedTodos: Int {
         return todos.filter({ $0.isCompleted }).count
     }
     
@@ -226,6 +229,11 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         let timer = Timer(fireAt: resetTime, interval: 0, target: self, selector: #selector(resetTodos), userInfo: nil, repeats: false)
         RunLoop.main.add(timer, forMode: .common)
+    }
+    
+    func updateBricksInGameScene() {
+        let gameScene = GameScene(size: UIScreen.main.bounds.size)
+        return gameScene.updateCompletedTodos(completedTodos: completedTodos)
     }
         
     //    @IBAction func startEditing(_ sender: Any) {    /// 🙋🏻‍♂️ 이 친구는 어떤 역할을 하는지 한번 더 봐야한다
