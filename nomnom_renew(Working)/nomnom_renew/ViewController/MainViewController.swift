@@ -19,6 +19,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     //    let gradientLayer = CAGradientLayer()
     let defaults = UserDefaults.standard
     let presenter = Presenter()
+    
+    /// 🙋🏻‍♂️ 이 방식을 없애야 하는데...
     let messageVC = MessageViewController()
     
     /// creating sample todos
@@ -27,10 +29,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         Todo(title: "오늘 완료할 투두를 24자 이내로 작성하세요!", isCompleted: false),
         Todo(title: "투두를 완료할수록 놀이도 더 커집니다!", isCompleted: false)
     ]
-
-//    struct Keys {
-//        static let todoName = "todoName"
-//    }
     
     var totalCount: Int {
         return todos.count
@@ -40,14 +38,11 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         return todos.filter({ $0.isCompleted }).count
     }
     
-    /// Todo 속에서 이미 checked로 구분할 수 있을 줄 알았는데 - 이 방식이 더 좋은 건가? 🙋🏻‍♂️ >> Section으로 구분하는건 포기
-    //    var sectionData: [Section] = [
-    //        .complete,
-    //        .incomplete
-    //    ]
+    /// Todo 속에서 이미 checked로 구분할 수 있을 줄 알았는데 - 이 방식이 더 좋은 건가? 🙋🏻‍♂️ >> Section으로 구분하는건 포기 >>>> section으로 구분하는 방식이 좋다기 보다 - section별로 내가 정리를 하면 코드에 적용할 때 호출하기 편해지기 때문
     
     private let todoButton: UIButton = {
         let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
         bt.backgroundColor = .systemPink
         bt.setTitle("NOM", for: .normal)
         bt.titleLabel?.font = UIFont.systemFont(ofSize: 40, weight: .heavy)
@@ -59,8 +54,9 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         return bt
     }()
     
-    private let storageButton: UIButton = {
+    private let resetButton: UIButton = {
         let bt = UIButton(type: .custom)
+        bt.translatesAutoresizingMaskIntoConstraints = false
         bt.backgroundColor = .white
         bt.layer.borderWidth = 0.2
         bt.layer.borderColor = UIColor.gray.cgColor
@@ -68,12 +64,12 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         bt.layer.cornerRadius = bt.frame.height/2
         bt.clipsToBounds = true
         bt.translatesAutoresizingMaskIntoConstraints = false
-        bt.addTarget(self, action: #selector(storageButtonTapped), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         bt.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
         return bt
     }()
     
-    private let trackLabel: UILabel = {
+    private let countLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.frame.size = CGSize(width: 250, height: 40)
@@ -99,15 +95,12 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        loadTodos()
-        
-//        trackLabel.text = "\(completedTodos)"
-
-        configureView()
         tableView.delegate = self
         tableView.dataSource = self
         
+        view.backgroundColor = .white
+        loadTodos()
+        configureView()
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
         tableView.backgroundColor = .clear
@@ -115,6 +108,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         scheduleReset()
     }
     
+    /// 함수 행동을 명사로 선언해야하지
     func dateCalculator() {
         let date = Date()
         let formatter = DateFormatter()
@@ -126,12 +120,9 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     func configureView() {
-        todoButton.translatesAutoresizingMaskIntoConstraints = false
-        storageButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        buttonStack.addArrangedSubview(storageButton)
+        buttonStack.addArrangedSubview(resetButton)
         buttonStack.addArrangedSubview(todoButton)
-        view.addSubview(trackLabel)
+        view.addSubview(countLabel)
         buttonStack.distribution = .fillProportionally
         buttonStack.spacing = 10
         buttonStack.alignment = .center
@@ -140,15 +131,16 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         todoButton.rightAnchor.constraint(equalTo: buttonStack.rightAnchor).isActive = true
         todoButton.bottomAnchor.constraint(equalTo: buttonStack.bottomAnchor).isActive = true
         
-        storageButton.leftAnchor.constraint(equalTo: buttonStack.leftAnchor).isActive = true
-        storageButton.rightAnchor.constraint(equalTo: buttonStack.rightAnchor).isActive = true
+        resetButton.leftAnchor.constraint(equalTo: buttonStack.leftAnchor).isActive = true
+        resetButton.rightAnchor.constraint(equalTo: buttonStack.rightAnchor).isActive = true
         
-        trackLabel.centerXAnchor.constraint(equalTo: storageButton.centerXAnchor).isActive = true
-        trackLabel.centerYAnchor.constraint(equalTo: storageButton.centerYAnchor).isActive = true
+        countLabel.centerXAnchor.constraint(equalTo: resetButton.centerXAnchor).isActive = true
+        countLabel.centerYAnchor.constraint(equalTo: resetButton.centerYAnchor).isActive = true
     }
     
     @objc func todoButtonTapped(_ sender: UIButton) {
-        print("2nd VC 출력")
+        print(description)
+        print("투두 화면이 보입니다")
         /// ⭐️ 이 부분이 있기 때문에 todo 버튼을 누르고 다음 화면으로 넘어갔을 때 데이터를 전달 받을 수 있는건가 ⭐️ >> YES!
         messageVC.delegate = self
         
@@ -156,11 +148,10 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         presenter.present(messageVC, from: self)
     }
     
-    @objc func storageButtonTapped() {
-        print("저장 버튼이 눌렸습니다.")
-        
+    @objc func resetButtonTapped() {
+        print("리셋 버튼이 눌렸습니다")
         let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
-        
+    
         if let presentedVC = self.presentedViewController {
             presentedVC.dismiss(animated: false) {
                 self.present(gameVC, animated: true)
@@ -196,12 +187,14 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
             defaults.set(data, forKey: "todos")
             defaults.synchronize()
         } catch {
+            /// ⏲️ 여길 고쳐야겠네 (error 발생 관련)
             print("에러가 발생했습니다 \(error)")
         }
     }
     
     /// 저장된 todo를 불러오는 방식 - using Decoder since Todo is NOT a type of String, a custom type
     func loadTodos() {
+        /// ⏲️ 여기도 한 줄 줄일 수 있겠다
         if let savedTodos = defaults.object(forKey: "todos") as? Data {
             let decoder = JSONDecoder()
             if let decodedTodos = try?decoder.decode([Todo].self, from: savedTodos) {
@@ -209,12 +202,14 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
             }
 //        if let savedTodos = UserDefaults.standard.array(forKey: "todos") as? [Todo] {
 //            todos = savedTodos
-            /// 2nd VC에 이렇게 접근하는 방식 자체가 잘못된 것
+            /// 🔥 2nd VC에 이렇게 접근하는 방식 자체가 잘못된 것
             //        let todo = defaults.value(forKey: Keys.todoName) as? String ?? ""
             //        messageVC.messageField.text = todo
         }
     }
     
+    
+    /// 특정 시간이 되면 투두를 한번에 밀어버릴 수 있도록 하는 것 -> trying to create a Daily Todo app, one you can use to Break your completed todos visually
     @objc func resetTodos() {
         defaults.removeObject(forKey: "todos")
         defaults.synchronize()
@@ -224,6 +219,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         let calender = Calendar(identifier: .gregorian)
         let now = Date()
         let todayAtMidnight = calender.startOfDay(for: now) /// 정확한가?
+        /// ⏲️ 이렇게 '!'를 쓰지 말라고 했는데... 이건 어떻게 해결할 수 있지?
         let resetDate = calender.date(byAdding: .day, value: 1, to: todayAtMidnight)!
         let resetTime = calender.date(bySettingHour: 21, minute: 00, second: 00, of: resetDate)!
         
@@ -239,24 +235,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     //    @IBAction func startEditing(_ sender: Any) {    /// 🙋🏻‍♂️ 이 친구는 어떤 역할을 하는지 한번 더 봐야한다
     //        tableView.isEditing = !tableView.isEditing
     //    }
-    
-    //    func addNewTodo(_ todo: Todo) {
-    //        incompletedTodo.append(todo)
-    //    }
-    //
-    //    func completeTodos(_ todo: Todo) {
-    //        if let index = incompletedTodo.firstIndex(of: todo) {
-    //            incompletedTodo.remove(at: index)
-    //            completedTodo.append(todo)
-    //        }
-    //    }
-    //
-    //    func incompleteTodos(_ todo: Todo) {
-    //        if let index = completedTodo.firstIndex(of: todo) {
-    //            completedTodo.remove(at: index)
-    //            incompletedTodo.append(todo)
-    //        }
-    //    }
 }
 
 extension MainViewController: TodoTableViewCellDelegate {
@@ -267,9 +245,11 @@ extension MainViewController: TodoTableViewCellDelegate {
         
         let todo = todos[indexPath.row]
         let newTodo = Todo(title: todo.title, isCompleted: checked)
+        /// ⏲️ 여기서 todo = newTodo로 적용하지 못하는 이유는 뭘까?
         todos[indexPath.row] = newTodo
         
-        trackLabel.text = "\(completedTodos)"
+        /// checked를 누를 때 값을 호출해야하는거니까 여기서 출력을 하게 되는 것 >>> ⏲️ 값을 호출할 때 여기서 부르는 거기 때문에 저장이 되는 건 아니다 - HOW TO MAKE THE COUNT SAVE ITSELF?
+        countLabel.text = "\(completedTodos)"
         
         /// 여기에 업데이트 상황을 확인해야하는데 없어서 못하는거였나?
         saveTodos()
@@ -366,26 +346,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         //        cell.titleLabel.text = todo.title
         //        cell.checkBox.checked = todo.isCompleted
         //        return cell
-        
-        
-        /// 이건 왜 있어야하지?
-        //        guard let sectionType = Section(rawValue: indexPath.section) else {
-        //            return cell
-        //        }
-        
-        //        switch sectionType {
-        //        case .incomplete:
-        //            let todo = incompletedTodo[indexPath.row]
-        ////            cell.set(title: todo.title, checked: !todo.isCompleted)
-        ////            cell.configure(with: todo)
-        //        case .complete:
-        //            let todo = completedTodo[indexPath.row]
-        //            cell.set(title: todo.title, checked: todo.isCompleted)
-        ////            cell.configure(with: todo)
-        //        }
-        
-        //        let todo = todos[indexPath.row]
-        //        cell.set(title: todo.title, checked: todo.isCompleted)
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
