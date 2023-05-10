@@ -19,6 +19,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     //    let gradientLayer = CAGradientLayer()
     let defaults = UserDefaults.standard
     let presenter = Presenter()
+    var newGame: GameScene!
     
     /// 🙋🏻‍♂️ 이 방식을 없애야 하는데...
     let messageVC = MessageViewController()
@@ -97,15 +98,16 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
-        view.backgroundColor = .white
-        loadTodos()
-        configureView()
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
         tableView.backgroundColor = .clear
+        view.backgroundColor = .white
+        
+        loadTodos()
+        configureView()
         dateCalculator()
         scheduleReset()
+        updateBricksInGame()
     }
     
     /// 함수 행동을 명사로 선언해야하지
@@ -227,9 +229,9 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         RunLoop.main.add(timer, forMode: .common)
     }
     
-    func updateBricksInGameScene() {
-        let gameScene = GameScene(size: UIScreen.main.bounds.size)
-        return gameScene.updateCompletedTodos(completedTodos: completedTodos)
+    func updateBricksInGame() {
+        newGame = GameScene(size: UIScreen.main.bounds.size)
+        return newGame.updateCompletedTodos(completedTodos: completedTodos)
     }
         
     //    @IBAction func startEditing(_ sender: Any) {    /// 🙋🏻‍♂️ 이 친구는 어떤 역할을 하는지 한번 더 봐야한다

@@ -7,11 +7,10 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
+//import GameplayKit
 import breakOutFramework
 
-class breakOutViewController: UIViewController {
-    
+class breakOutViewController: UIViewController {    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +21,7 @@ class breakOutViewController: UIViewController {
         
         if skView.scene == nil {
             skView.showsFPS = true
-            skView.showsNodeCount = true
+            skView.showsNodeCount = false
             
             let gameScene = GameScene(size: skView.bounds.size)
             gameScene.scaleMode = .resizeFill
@@ -31,9 +30,9 @@ class breakOutViewController: UIViewController {
     }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
+            return .portrait
         } else {
-            return .all
+            return .portrait
         }
     }
     
