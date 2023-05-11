@@ -107,7 +107,7 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         configureView()
         dateCalculator()
         scheduleReset()
-        updateBricksInGame()
+//        updateCompletedTodos()
     }
     
     /// 함수 행동을 명사로 선언해야하지
@@ -152,6 +152,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     @objc func resetButtonTapped() {
         print("리셋 버튼이 눌렸습니다")
+        
+        defaults.set(completedTodos, forKey: "NumberOfBricks")
         let gameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "gameVC") as! breakOutViewController
     
         if let presentedVC = self.presentedViewController {
@@ -229,10 +231,10 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         RunLoop.main.add(timer, forMode: .common)
     }
     
-    func updateBricksInGame() {
-        newGame = GameScene(size: UIScreen.main.bounds.size)
-        return newGame.updateCompletedTodos(completedTodos: completedTodos)
-    }
+//    func updateCompletedTodos() {
+//        newGame = GameScene(size: UIScreen.main.bounds.size)
+//        return newGame.updateBricksInGame(completedTodos: Int(completedTodos))
+//    }
         
     //    @IBAction func startEditing(_ sender: Any) {    /// 🙋🏻‍♂️ 이 친구는 어떤 역할을 하는지 한번 더 봐야한다
     //        tableView.isEditing = !tableView.isEditing
