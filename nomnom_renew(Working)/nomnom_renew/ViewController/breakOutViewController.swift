@@ -21,7 +21,7 @@ class breakOutViewController: UIViewController {
         
         if skView.scene == nil {
             skView.showsFPS = true
-            skView.showsNodeCount = false
+            skView.showsNodeCount = true
             
             let gameScene = GameScene(size: skView.bounds.size)
             gameScene.scaleMode = .resizeFill
