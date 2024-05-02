@@ -1,36 +1,25 @@
 # FirstApp_NomNom
 
-## 4/8
-- created every label, button, views through code (programmatically)
-- no issue with having buttons and views connected
-- enabled Button to connect to 2nd VC, overall visuals of the apps (excluding colors)
+A simple todo app developed using UIKit.<br/>
+The app displays the users' todos as dynamically as users add their todos as well as remove, edit or check as complete.
+The completed numbers of todos are also displayed which the users can tap to enter a game.<br/>
+The number of todos become the number of obstacles the users need to break within the game.
 
-### 4/9
-- added Todo UIView to act as UItextField(will place on later)
-- created Animating effect to appear and disappear from current view without delay
-- faced issue with button after embedding within TableViewCell. Apparently placing a button within a cell overlays the cell above the button, making it unclickable > fixed issue using delegatePattern by adding the target DIRECTLY TO @OBJC Func (&& by delegating the func to viewController - the button now appeared to be working within the cell)
+## Features
+<img width="610" alt="Screenshot 2024-05-02 at 17 41 22" src="https://github.com/Madman-dev/FirstApp_NomNom/assets/119504454/fbb43506-daae-4d8f-bbe7-7e800a3cef4a"><img width="150" src="https://github.com/Madman-dev/FirstApp_NomNom/assets/119504454/67f40e1d-d24e-410d-84d7-3fe44e26b556">
 
-> after trying to create a checkable / crossing out title label within tableViewCell,
-to work like a ToDo app - I have failed to make the functions work.
-Code to connecting the targets have gone difficult to straighten out.
-Created UITableView anew through storyboard.
+1. **Add Todos -** tap 'Nom' to type additional todos.
+2. **Remove Todos -** swipe todos left to delete todos.
+3. **Complete Todos -** swipe todos right or tap the circle to mark todos complete.
+4. **Edit Todos -** tap the todo to edit an existing todo on screen.
+5. **Play breakout -** tap the number displaying button to play breakout with the total numbers of todos you've completed.
 
-### 4/10
-- unable to fix previous issue with UITableView
-- made adjustments to plan && app UX/UI
+## Technical Details
+- UIKit was used to create the todo app.
+- SpriteKit, GamePlayKit and AVFoundation was used to create the breakout game and embed sound within the game.
+- As todos are simple data, userdefaults was used to store and preserve data in your device.
 
-### 4/11
-- added 'complete', 'delete' features within todo list
-- added new button to check previous written/ daily finished tasks - plan to change plans to this feature as I have a specific plan for the app
-- fixed issue with having gradientLayer being projected over the todo list as well as the button - considering time frame of the app's launch was VERY important
-
-### 4/12
-- spent most of the time searching to learn about custom Transition
-* difficult to learn, still don't understand much of it but found lot of resources in creating one
-
-### 4/13
-- lots of trials and errors regarding using custom transition inside the app.
-** managed to place a transition in, but apparently a view transition is not what's needed for my use
-- to place in a button within the transitioning image, I'll have to look into collectionViewCell transition - will have to post online && ask for help
-![ezgif com-resize](https://user-images.githubusercontent.com/119504454/231800035-48072093-2804-4fd0-9fc3-3b3d3a13cbae.gif)
-
+## Technical Difficulties
+- Not using Storyboard, only programmatic code
+- Issue with embedding button within TableViewCell
+- Configuring custom transition to type todo
