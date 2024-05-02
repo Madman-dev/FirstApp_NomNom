@@ -18,9 +18,9 @@ class Checkbox: UIControl {
     
     /// @IBInspectable은 무엇을 하는 코드인가?
     @IBInspectable
-    public var checked: Bool = false {    // why make it public? >> able to put in package? hm...
+    public var checked: Bool = false {
         didSet {
-            imageView.image = image // able to reset image according to whether if it is checked or not
+            imageView.image = image
         }
     }
         
@@ -51,7 +51,7 @@ class Checkbox: UIControl {
         addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
     }
     
-    @objc func touchUpInside() {    /// 🙋🏻‍♂️ 여기가 어떻게 작동하는지 확인 필요
+    @objc func touchUpInside() {
         print("clicked")
         checked = !checked
         sendActions(for: .valueChanged)

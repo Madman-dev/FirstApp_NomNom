@@ -24,8 +24,7 @@ class IntroViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(loadingView)
         loadingView.center = view.center
-        // imageView.frame = view.bounds >> 이 코드로 인해 X,Y 값이 반전 되었다.
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) { /// ⭐️ 이부분은 우리에게 보이고 나서 실행되는 부분을 뜻하는구나
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             self.animation()
         }
     }

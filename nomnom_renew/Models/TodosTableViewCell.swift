@@ -36,28 +36,14 @@ class TodoTableViewCell: UITableViewCell {
         updateChecked()
     }
     
-    private func updateChecked() {  /// 정확하게 어떤 코드들인지 한번 더 체크
+    private func updateChecked() {
         let attributedString = NSMutableAttributedString(string: titleLabel.text!)
         
         if checkBox.checked {
-            attributedString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributedString.length))    /// -1을 했던 이유는 뭘까? / value는 두께를 말하는거구나 (addAttribute를 통해 원하는 스타일을 추가할 수 있다는 점이 있네... 색깔을 변하게 하는 방법도 알아보자!)
+            attributedString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributedString.length))
         } else {
-            attributedString.removeAttribute(.strikethroughStyle, range: NSMakeRange(0, attributedString.length))   /// -1을 했던 이유는 뭘까?
+            attributedString.removeAttribute(.strikethroughStyle, range: NSMakeRange(0, attributedString.length))
         }
         titleLabel.attributedText = attributedString
     }
-    
-//    func updateTodoCompletionStatus(at index: Int, completed: Bool) {
-//        mainVC.todos[index].isCompleted = completed
-//
-//        mainVC.todos.sort { (todo1, todo2) -> Bool in
-//            if todo1.isCompleted == todo2.isCompleted {
-//                return todo1.title < todo2.title
-//            } else {
-//                return !todo1.isCompleted
-//            }
-//        }
-//        mainVC.tableView.reloadData()
-//    }
-//
 }

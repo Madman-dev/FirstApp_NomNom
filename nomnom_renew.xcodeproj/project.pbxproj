@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BD48141529FAB723008425A8 /* paddleBlip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141129FAB723008425A8 /* paddleBlip.wav */; };
-		BD48141629FAB723008425A8 /* game-over.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141229FAB723008425A8 /* game-over.wav */; };
-		BD48141729FAB723008425A8 /* BambooBreak.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141329FAB723008425A8 /* BambooBreak.wav */; };
-		BD48141829FAB723008425A8 /* pongblip.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD48141429FAB723008425A8 /* pongblip.wav */; };
 		BD94867B29ED548B00FEF546 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94867A29ED548B00FEF546 /* AppDelegate.swift */; };
 		BD94867D29ED548B00FEF546 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94867C29ED548B00FEF546 /* SceneDelegate.swift */; };
 		BD94867F29ED548B00FEF546 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD94867E29ED548B00FEF546 /* MainViewController.swift */; };
@@ -30,9 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BDE2DDEA29F7E1B3000F494A /* PBXContainerItemProxy */ = {
+		BDF816682BE378820010865A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = BDE2DDE629F7E1B3000F494A /* breakOutFramework.xcodeproj */;
+			containerPortal = BDF816632BE378820010865A /* breakOutFramework.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BDE2DDB929F7E0B6000F494A;
 			remoteInfo = breakOutFramework;
@@ -61,10 +57,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BD48141129FAB723008425A8 /* paddleBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = paddleBlip.wav; path = nomnom_renew/Sounds/paddleBlip.wav; sourceTree = SOURCE_ROOT; };
-		BD48141229FAB723008425A8 /* game-over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "game-over.wav"; path = "nomnom_renew/Sounds/game-over.wav"; sourceTree = SOURCE_ROOT; };
-		BD48141329FAB723008425A8 /* BambooBreak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = BambooBreak.wav; path = nomnom_renew/Sounds/BambooBreak.wav; sourceTree = SOURCE_ROOT; };
-		BD48141429FAB723008425A8 /* pongblip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pongblip.wav; path = nomnom_renew/Sounds/pongblip.wav; sourceTree = SOURCE_ROOT; };
 		BD83350F2A0258FC00BE4030 /* nomnom_renew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nomnom_renew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD94867A29ED548B00FEF546 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD94867C29ED548B00FEF546 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,8 +72,21 @@
 		BD94869D29ED55C200FEF546 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		BD94869F29ED58BC00FEF546 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		BD9486A129ED704F00FEF546 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		BDE2DDE629F7E1B3000F494A /* breakOutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = breakOutFramework.xcodeproj; path = ../../breakOutFramework/breakOutFramework.xcodeproj; sourceTree = "<group>"; };
 		BDE2DDEF29F7E655000F494A /* breakOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breakOutViewController.swift; sourceTree = "<group>"; };
+		BDF816522BE378820010865A /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		BDF816532BE378820010865A /* Playing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playing.swift; sourceTree = "<group>"; };
+		BDF816542BE378820010865A /* WaitingForTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForTap.swift; sourceTree = "<group>"; };
+		BDF816562BE378820010865A /* BrokenPlatform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrokenPlatform.sks; sourceTree = "<group>"; };
+		BDF816582BE378820010865A /* BambooBreak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BambooBreak.wav; sourceTree = "<group>"; };
+		BDF816592BE378820010865A /* game-over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "game-over.wav"; sourceTree = "<group>"; };
+		BDF8165A2BE378820010865A /* paddleBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paddleBlip.wav; sourceTree = "<group>"; };
+		BDF8165B2BE378820010865A /* pongblip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pongblip.wav; sourceTree = "<group>"; };
+		BDF8165D2BE378820010865A /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		BDF8165E2BE378820010865A /* breakOutFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = breakOutFramework.h; sourceTree = "<group>"; };
+		BDF8165F2BE378820010865A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		BDF816602BE378820010865A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		BDF816612BE378820010865A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		BDF816632BE378820010865A /* breakOutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = breakOutFramework.xcodeproj; sourceTree = "<group>"; };
 		BDFF65FA2BE37763009EC08B /* breakOutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = breakOutFramework.xcodeproj; path = breakOutFramework/breakOutFramework.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,21 +102,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BD48140F29FAB70F008425A8 /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				BD48141329FAB723008425A8 /* BambooBreak.wav */,
-				BD48141229FAB723008425A8 /* game-over.wav */,
-				BD48141129FAB723008425A8 /* paddleBlip.wav */,
-				BD48141429FAB723008425A8 /* pongblip.wav */,
-			);
-			path = Sound;
-			sourceTree = "<group>";
-		};
 		BD94866E29ED548B00FEF546 = {
 			isa = PBXGroup;
 			children = (
-				BDE2DDE629F7E1B3000F494A /* breakOutFramework.xcodeproj */,
+				BDF816642BE378820010865A /* breakOutFramework */,
 				BD94867929ED548B00FEF546 /* nomnom_renew */,
 				BD83350F2A0258FC00BE4030 /* nomnom_renew.app */,
 				BDFF65F92BE37763009EC08B /* Frameworks */,
@@ -126,7 +120,6 @@
 				BD94869A29ED559700FEF546 /* Extensions */,
 				BD94869329ED556000FEF546 /* Models */,
 				BD94869029ED550A00FEF546 /* ViewController */,
-				BD48140F29FAB70F008425A8 /* Sound */,
 				BD94868029ED548B00FEF546 /* Main.storyboard */,
 				BD94868329ED548C00FEF546 /* Assets.xcassets */,
 				BD94868829ED548C00FEF546 /* Info.plist */,
@@ -165,10 +158,63 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		BDE2DDE729F7E1B3000F494A /* Products */ = {
+		BDF816552BE378820010865A /* GameState */ = {
 			isa = PBXGroup;
 			children = (
-				BDE2DDEB29F7E1B3000F494A /* breakOutFramework.framework */,
+				BDF816522BE378820010865A /* GameOver.swift */,
+				BDF816532BE378820010865A /* Playing.swift */,
+				BDF816542BE378820010865A /* WaitingForTap.swift */,
+			);
+			path = GameState;
+			sourceTree = "<group>";
+		};
+		BDF816572BE378820010865A /* particles */ = {
+			isa = PBXGroup;
+			children = (
+				BDF816562BE378820010865A /* BrokenPlatform.sks */,
+			);
+			path = particles;
+			sourceTree = "<group>";
+		};
+		BDF8165C2BE378820010865A /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				BDF816582BE378820010865A /* BambooBreak.wav */,
+				BDF816592BE378820010865A /* game-over.wav */,
+				BDF8165A2BE378820010865A /* paddleBlip.wav */,
+				BDF8165B2BE378820010865A /* pongblip.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		BDF816622BE378820010865A /* breakOutFramework */ = {
+			isa = PBXGroup;
+			children = (
+				BDF816552BE378820010865A /* GameState */,
+				BDF816572BE378820010865A /* particles */,
+				BDF8165C2BE378820010865A /* Sounds */,
+				BDF8165D2BE378820010865A /* Actions.sks */,
+				BDF8165E2BE378820010865A /* breakOutFramework.h */,
+				BDF8165F2BE378820010865A /* GameScene.sks */,
+				BDF816602BE378820010865A /* GameScene.swift */,
+				BDF816612BE378820010865A /* GameViewController.swift */,
+			);
+			path = breakOutFramework;
+			sourceTree = "<group>";
+		};
+		BDF816642BE378820010865A /* breakOutFramework */ = {
+			isa = PBXGroup;
+			children = (
+				BDF816622BE378820010865A /* breakOutFramework */,
+				BDF816632BE378820010865A /* breakOutFramework.xcodeproj */,
+			);
+			path = breakOutFramework;
+			sourceTree = "<group>";
+		};
+		BDF816652BE378820010865A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDF816692BE378820010865A /* breakOutFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,8 +284,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = BDE2DDE729F7E1B3000F494A /* Products */;
-					ProjectRef = BDE2DDE629F7E1B3000F494A /* breakOutFramework.xcodeproj */;
+					ProductGroup = BDF816652BE378820010865A /* Products */;
+					ProjectRef = BDF816632BE378820010865A /* breakOutFramework.xcodeproj */;
 				},
 				{
 					ProductGroup = BDFF65FB2BE37763009EC08B /* Products */;
@@ -254,11 +300,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		BDE2DDEB29F7E1B3000F494A /* breakOutFramework.framework */ = {
+		BDF816692BE378820010865A /* breakOutFramework.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = breakOutFramework.framework;
-			remoteRef = BDE2DDEA29F7E1B3000F494A /* PBXContainerItemProxy */;
+			remoteRef = BDF816682BE378820010865A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BDFF65FF2BE37763009EC08B /* breakOutFramework.framework */ = {
@@ -275,12 +321,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD48141629FAB723008425A8 /* game-over.wav in Resources */,
 				BD94868429ED548C00FEF546 /* Assets.xcassets in Resources */,
-				BD48141529FAB723008425A8 /* paddleBlip.wav in Resources */,
-				BD48141729FAB723008425A8 /* BambooBreak.wav in Resources */,
 				BD94868229ED548B00FEF546 /* Main.storyboard in Resources */,
-				BD48141829FAB723008425A8 /* pongblip.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

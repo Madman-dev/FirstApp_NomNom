@@ -11,7 +11,8 @@ class Presenter: NSObject, UIViewControllerTransitioningDelegate {
 
     private let transition = Transition()
 
-    func present(_ viewController: UIViewController, from parent: UIViewController) {
+    func present(_ viewController: UIViewController,
+                 from parent: UIViewController) {
         viewController.modalPresentationStyle = .overFullScreen
         viewController.transitioningDelegate = self
         parent.present(viewController, animated: true)
